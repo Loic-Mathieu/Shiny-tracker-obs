@@ -1,22 +1,58 @@
 <div class="card">
-	<div class="card-body">
-		<div class="card-header">
-			<h5 class="card-title">{{hunt.name}}</h5>
-			<div class="options">
-				options
+	<div class="card-header hunt-header">
+		<h4 id="hunt-title" class="card-title">{{hunt.name}}</h4>
+		<div class="toggle-button">
+			<fa-icon [icon]="['fas', 'chevron-up']" size="2x" *ngIf="!toggled"></fa-icon>
+			<fa-icon [icon]="['fas', 'chevron-down']" size="2x" *ngIf="toggled"></fa-icon>
+		</div>
+	</div>
+	<div class="card-body hunt-body">
+		<div class="hunt-tools">
+			<div class="hunt-actions">
+				<fa-icon [icon]="['fas', 'edit']"></fa-icon>
+				<fa-icon [icon]="['fas', 'eraser']"></fa-icon>
+			</div>
+
+			<div class="hunt-options">
+				<fa-icon [icon]="['fas', 'cog']"></fa-icon>
 			</div>
 		</div>
-		<hr/>
-		<div>
-			<div class="pokemon-encounter">
-				<span>{{hunt.encounterNumber}}</span>
-				<span>
-					<button (click)="hunt.encounterNumber = hunt.encounterNumber +1">+</button>
-					<button (click)="hunt.encounterNumber = hunt.encounterNumber +1">-</button>
-				</span>
+
+		<br>
+		<div class="hunt-infos">
+			<div class="container pokemon-encounter">
+				<div class="input-group input-group-lg justify-content-center">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Encounters</span>
+					</div>
+					<div class="form-control-full">
+						<span id="hunt-encounter">{{hunt.encounterNumber}}</span>
+					</div>
+					<div class="btn-group-vertical">
+						<button class="btn btn-success btn-block" (click)="hunt.encounterNumber = hunt.encounterNumber +1">
+							<fa-icon [icon]="['fas', 'plus']"></fa-icon>
+						</button>
+						<button class="btn btn-danger btn-block" (click)="hunt.encounterNumber = hunt.encounterNumber -1">
+							<fa-icon [icon]="['fas', 'minus']"></fa-icon>
+						</button>
+					</div>
+				</div>
 			</div>
-			<div class="shiny-rate">
-				<span>{{hunt.rate}}</span>
+			<div class="container shiny-rate">
+				<div class="justify-content-center">
+					<div class="input-group output">
+						<div class="input-group-prepend">
+							<label class="input-group-text shiny-hunt-label">Chances</label>
+						</div>
+						<span class="form-control text-center" id="shiny-chances">{{calculateProbability()}}%</span>
+					</div>
+					<div class="input-group output">
+						<div class="input-group-prepend">
+							<span class="input-group-text shiny-hunt-label">Rate</span>
+						</div>
+						<span class="form-control text-center" id="shiny-rate">1 / {{hunt.odds}}</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

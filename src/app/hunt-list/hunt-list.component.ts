@@ -23,19 +23,19 @@ export class HuntListComponent implements OnInit {
                 name: 'TEST-A',
                 enabled: true,
                 encounterNumber: 12,
-                rate: 100
+                odds: 100
             },
             {
                 name: 'TEST-B',
                 enabled: true,
                 encounterNumber: 60,
-                rate: 100
+                odds: 100
             },
             {
                 name: 'TEST-C',
                 enabled: true,
                 encounterNumber: 42,
-                rate: 100
+                odds: 100
             },
         ];
     }
