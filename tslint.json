@@ -23,9 +23,7 @@
     ],
     "import-spacing": true,
     "indent": {
-      "options": [
-        "spaces"
-      ]
+      "options": []
     },
     "max-classes-per-file": false,
     "max-line-length": [

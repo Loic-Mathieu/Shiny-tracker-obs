@@ -1,0 +1,9 @@
+<div>
+    <h2>Current hunts</h2>
+    <div id="hunt-list">
+        <div class="hunt-wrapper"
+             *ngFor="let hunt of hunts">
+            <app-hunt [hunt]="hunt"></app-hunt>
+        </div>
+    </div>
+</div>
