@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Hunt} from './hunt';
+import {FileService} from '../../service/file.service';
+import {FileType} from '../../options/fileType';
 
 @Component({
     selector: 'app-hunt',
@@ -14,7 +16,7 @@ export class HuntComponent implements OnInit {
     @Input()
     toggled: boolean;
 
-    constructor() { }
+    constructor(private fileService: FileService) { }
 
     ngOnInit(): void {
     }
@@ -34,5 +36,24 @@ export class HuntComponent implements OnInit {
         const baseRate = (1 / this.hunt.odds);
         const shinyChances = (1 - Math.pow((1 - baseRate), this.hunt.encounterNumber));
         return (shinyChances * 100).toFixed(2);
+    }
+
+    increaseEncounterNumber(): void {
+        this.hunt.encounterNumber++;
+        this.updateFiles();
+    }
+
+    decreaseEncounterNumber(): void {
+        this.hunt.encounterNumber--;
+        this.updateFiles();
+    }
+
+    private updateFiles(): void {
+        Promise.all([
+            this.fileService.write(this.hunt.name, FileType.ENCOUNTER_TRACKER, this.hunt.encounterNumber),
+            this.fileService.write(this.hunt.name, FileType.ODDS, this.calculateProbability())
+        ])
+            .then(result => console.log('OK', result))
+            .catch(error => console.error('BAAAD', error));
     }
 }

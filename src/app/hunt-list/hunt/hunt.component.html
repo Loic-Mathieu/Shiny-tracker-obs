@@ -29,10 +29,10 @@
 						<span id="hunt-encounter">{{hunt.encounterNumber}}</span>
 					</div>
 					<div class="btn-group-vertical">
-						<button class="btn btn-success btn-block" (click)="hunt.encounterNumber = hunt.encounterNumber +1">
+						<button class="btn btn-success btn-block" (click)="increaseEncounterNumber()">
 							<fa-icon [icon]="['fas', 'plus']"></fa-icon>
 						</button>
-						<button class="btn btn-danger btn-block" (click)="hunt.encounterNumber = hunt.encounterNumber -1">
+						<button class="btn btn-danger btn-block" (click)="decreaseEncounterNumber()">
 							<fa-icon [icon]="['fas', 'minus']"></fa-icon>
 						</button>
 					</div>
