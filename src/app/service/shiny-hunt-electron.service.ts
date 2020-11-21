@@ -11,10 +11,5 @@ export class ShinyHuntElectronService {
     constructor(private electronServiceInstance: ElectronService) {
     }
 
-    public testCall(path): void {
-        console.log(this.electronServiceInstance);
-        this.electronServiceInstance.ipcRenderer.send('TEST_URI', path);
-    }
-
 
 }

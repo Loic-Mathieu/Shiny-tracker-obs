@@ -39,7 +39,9 @@ export class HuntComponent implements OnInit {
     }
 
     test(): void {
-        console.log(this.electronServiceInstance);
-        this.electronServiceInstance.ipcRenderer.send('TEST_URI', this.hunt.name);
+        this.electronServiceInstance.ipcRenderer.send('TEST_URI', {
+            path: `C:/shinyTest/${this.hunt.name}/name.txt`,
+            content: this.hunt.encounterNumber
+        });
     }
 }

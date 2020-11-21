@@ -1,6 +1,8 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron');
 const url = require("url");
 const path = require("path");
+
+const scripts = require(path.join(__dirname, `/dist/scripts`));
 
 let mainWindow
 
@@ -31,6 +33,14 @@ function createWindow () {
 
 app.on('ready', createWindow)
 
+app.on('keep-focus', function () {
+	mainWindow.setAlwaysOnTop(true, 'screen');
+})
+
+app.on('loose-focus', function () {
+	mainWindow.setAlwaysOnTop(false, 'screen');
+})
+
 app.on('window-all-closed', function () {
 	if (process.platform !== 'darwin') app.quit()
 })
@@ -39,6 +49,7 @@ app.on('activate', function () {
 	if (mainWindow === null) createWindow()
 })
 
+/*	=====	API	=====	*/
 ipcMain.on('TEST_URI', (event, arg) => {
-	console.log('OWO', arg);
+	scripts.sendMessageTest(arg);
 })
