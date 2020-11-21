@@ -9,7 +9,9 @@ function createWindow () {
 		width: 1000,
 		minWidth: 1000,
 		height: 600,
-		webPreferences: { nodeIntegration: true }
+		webPreferences: { nodeIntegration: true },
+		title: 'Shiny tracker tool',
+		icon: path.join(__dirname, `/dist/icon/icon.ico`)
 	});
 
 	mainWindow.loadURL(
@@ -38,5 +40,5 @@ app.on('activate', function () {
 })
 
 ipcMain.on('TEST_URI', (event, arg) => {
-	console.log('OWO', event, arg);
+	console.log('OWO', arg);
 })
