@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { HuntListComponent } from './hunt-list/hunt-list.component';
 import { HuntComponent } from './hunt-list/hunt/hunt.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ShinyHuntElectronService} from './service/shiny-hunt-electron.service';
+import {NgxElectronModule} from 'ngx-electron';
 
 @NgModule({
     declarations: [
@@ -15,8 +17,11 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     imports: [
         BrowserModule,
         FontAwesomeModule,
+        NgxElectronModule
     ],
-    providers: [],
+    providers: [
+        ShinyHuntElectronService,
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

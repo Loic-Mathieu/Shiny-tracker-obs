@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Hunt} from './hunt';
-import {FileService} from '../../service/file.service';
-import {FileType} from '../../options/fileType';
+import {ShinyHuntElectronService} from '../../service/shiny-hunt-electron.service';
+import {ElectronService} from 'ngx-electron';
 
 @Component({
     selector: 'app-hunt',
@@ -16,7 +16,7 @@ export class HuntComponent implements OnInit {
     @Input()
     toggled: boolean;
 
-    constructor(private fileService: FileService) { }
+    constructor(private electronServiceInstance: ElectronService) { }
 
     ngOnInit(): void {
     }
@@ -55,5 +55,12 @@ export class HuntComponent implements OnInit {
         ])
             .then(result => console.log('OK', result))
             .catch(error => console.error('BAAAD', error));
+    }
+
+    test(): void {
+        this.electronServiceInstance.ipcRenderer.send('TEST_URI', {
+            path: `C:/shinyTest/${this.hunt.name}/name.txt`,
+            content: this.hunt.encounterNumber
+        });
     }
 }
