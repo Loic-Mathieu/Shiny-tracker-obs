@@ -51,5 +51,5 @@ app.on('activate', function () {
 
 /*	=====	API	=====	*/
 ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
-	scripts.writeToFile(arg.path, arg.content);
+	scripts.writeToFile(arg.path, arg.fileName, arg.content);
 })

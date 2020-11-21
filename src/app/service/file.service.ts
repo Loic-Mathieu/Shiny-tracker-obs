@@ -11,8 +11,8 @@ export class FileService {
 
     constructor(private electronServiceInstance: ElectronService) { }
 
-    private getPath(huntName: string, fileType: FileType): string {
-        return `${this.savePath}/${huntName}/${fileType}`;
+    private getPath(huntName: string): string {
+        return `${this.savePath}/${huntName}`;
     }
 
     read(huntName: string, fileType: FileType): Promise<string> {
@@ -22,7 +22,8 @@ export class FileService {
     write(huntName: string, fileType: FileType, content: any): Promise<any> {
         return new Promise<boolean>((resolve => {
             this.electronServiceInstance.ipcRenderer.send('WRITE_FILE_TEXT', {
-                path: this.getPath(huntName, fileType),
+                path: this.getPath(huntName),
+                fileName: fileType,
                 content: String(content)
             });
 
