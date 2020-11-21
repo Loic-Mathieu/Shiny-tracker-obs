@@ -37,13 +37,21 @@ const saveStore = new Store({
 	}
 });
 
+const preferencesStore = new Store({
+	configName: 'preferences',
+	data: {
+		width: 1000,
+		height: 600,
+	}
+});
+
 /*	=====	WINDOW	=====	*/
 let mainWindow
 function createWindow () {
 	mainWindow = new BrowserWindow({
-		width: 1000,
+		width: preferencesStore.get('width'),
 		minWidth: 1000,
-		height: 600,
+		height: preferencesStore.get('height'),
 		webPreferences: { nodeIntegration: true },
 		title: 'Shiny tracker tool',
 		icon: path.join(__dirname, `/dist/icon/icon.ico`)
@@ -62,10 +70,15 @@ function createWindow () {
 	mainWindow.on('closed', function () {
 		mainWindow = null
 	})
+
+	mainWindow.on('resize', () => {
+		let { width, height } = mainWindow.getBounds();
+		preferencesStore.set('width', width);
+		preferencesStore.set('height', height);
+	});
 }
 
 app.on('ready', () => {
-	console.log(saveStore.get('path'));
 	createWindow();
 })
 
@@ -84,6 +97,8 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
 	if (mainWindow === null) createWindow()
 })
+
+
 
 /*	=====	API	=====	*/
 ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
