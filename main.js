@@ -1,11 +1,44 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const url = require("url");
 const path = require("path");
+const fs = require('fs');
 
-const scripts = require(path.join(__dirname, `/dist/scripts`));
+/*	=====	STORE	=====	*/
+class Store {
+	constructor(opts) {
+		const userDataPath = app.getPath('userData');
+		this.path = path.join(userDataPath, opts.configName + '.json');
 
+		this.data = this.parseDataFile(this.path, opts.data);
+	}
+
+	get(key) {
+		return this.data[key];
+	}
+
+	set(key, val) {
+		this.data[key] = val;
+		fs.writeFileSync(this.path, JSON.stringify(this.data));
+	}
+
+	parseDataFile(filePath, data) {
+		try {
+			return JSON.parse(fs.readFileSync(filePath));
+		} catch(error) {
+			return data;
+		}
+	}
+}
+
+const saveStore = new Store({
+	configName: 'hunt-saves',
+	data: {
+		path: path.join(app.getPath('userData'), 'save')
+	}
+});
+
+/*	=====	WINDOW	=====	*/
 let mainWindow
-
 function createWindow () {
 	mainWindow = new BrowserWindow({
 		width: 1000,
@@ -31,7 +64,10 @@ function createWindow () {
 	})
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+	console.log(saveStore.get('path'));
+	createWindow();
+})
 
 app.on('keep-focus', function () {
 	mainWindow.setAlwaysOnTop(true, 'screen');
@@ -51,5 +87,11 @@ app.on('activate', function () {
 
 /*	=====	API	=====	*/
 ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
-	scripts.writeToFile(arg.path, arg.fileName, arg.content);
+	if (!fs.existsSync(saveStore.get('path'))){
+		fs.mkdirSync(saveStore.get('path'));
+	}
+
+	let fullPath = saveStore.get('path') + '\\' + arg.fileName;
+	console.log(fullPath);
+	fs.writeFile(fullPath, arg.content, err => {});
 })
