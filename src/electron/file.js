@@ -1,11 +1,8 @@
 const fs = require('fs');
 
 module.exports = {
-    sendMessageTest: (message) => {
-        console.log(message);
-    },
-
-    writeToFile: (path, fileName, content) => {
+    writeToFile: (path, content) => {
+        console.log(path, content);
         // fs.watchFile();
     }
 }

@@ -50,6 +50,6 @@ app.on('activate', function () {
 })
 
 /*	=====	API	=====	*/
-ipcMain.on('TEST_URI', (event, arg) => {
-	scripts.sendMessageTest(arg);
+ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
+	scripts.writeToFile(arg.path, arg.content);
 })
