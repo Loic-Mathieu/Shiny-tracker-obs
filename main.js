@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron')
 const url = require("url");
 const path = require("path");
 
@@ -9,6 +9,7 @@ function createWindow () {
 		width: 1000,
 		minWidth: 1000,
 		height: 600,
+		webPreferences: { nodeIntegration: true }
 	});
 
 	mainWindow.loadURL(
@@ -34,4 +35,8 @@ app.on('window-all-closed', function () {
 
 app.on('activate', function () {
 	if (mainWindow === null) createWindow()
+})
+
+ipcMain.on('TEST_URI', (event, arg) => {
+	console.log('OWO', event, arg);
 })

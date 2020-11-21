@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Hunt} from './hunt';
+import {ShinyHuntElectronService} from '../../service/shiny-hunt-electron.service';
+import {ElectronService} from 'ngx-electron';
 
 @Component({
     selector: 'app-hunt',
@@ -14,7 +16,7 @@ export class HuntComponent implements OnInit {
     @Input()
     toggled: boolean;
 
-    constructor() { }
+    constructor(private electronServiceInstance: ElectronService) { }
 
     ngOnInit(): void {
     }
@@ -34,5 +36,10 @@ export class HuntComponent implements OnInit {
         const baseRate = (1 / this.hunt.odds);
         const shinyChances = (1 - Math.pow((1 - baseRate), this.hunt.encounterNumber));
         return (shinyChances * 100).toFixed(2);
+    }
+
+    test(): void {
+        console.log(this.electronServiceInstance);
+        this.electronServiceInstance.ipcRenderer.send('TEST_URI', this.hunt.name);
     }
 }
