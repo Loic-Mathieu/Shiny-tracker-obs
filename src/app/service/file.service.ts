@@ -18,6 +18,7 @@ export class FileService {
     write(huntName: string, fileType: FileType, content: any): Promise<any> {
         return new Promise<boolean>((resolve => {
             this.electronServiceInstance.ipcRenderer.send('WRITE_FILE_TEXT', {
+                hunt: huntName,
                 fileName: fileType,
                 content: String(content)
             });

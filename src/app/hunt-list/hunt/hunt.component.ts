@@ -53,7 +53,7 @@ export class HuntComponent implements OnInit {
             this.fileService.write(this.hunt.name, FileType.ENCOUNTER_TRACKER, this.hunt.encounterNumber),
             this.fileService.write(this.hunt.name, FileType.ODDS, this.calculateProbability())
         ])
-            .then(result => console.log('OK', result))
+            .then(result => console.log('OK'))
             .catch(error => console.error('BAAAD', error));
     }
 }
