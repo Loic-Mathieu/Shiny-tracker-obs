@@ -37,6 +37,13 @@ const saveStore = new Store({
 	}
 });
 
+const huntStore = new Store({
+	configName: 'hunts',
+	data: {
+		hunts: [],
+	}
+});
+
 const preferencesStore = new Store({
 	configName: 'preferences',
 	data: {
@@ -44,6 +51,7 @@ const preferencesStore = new Store({
 		height: 600,
 	}
 });
+
 
 /*	=====	WINDOW	=====	*/
 let mainWindow
@@ -112,4 +120,10 @@ ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
 	fs.writeFile(fullPath, arg.content, err => {
 		console.log(err);
 	});
+})
+
+ipcMain.on('POST_HUNT', (event, arg) => {
+	let hunts = huntStore.get('hunts');
+	hunts.push(arg.hunt);
+	huntStore.set('hunts', hunts);
 })
