@@ -22,8 +22,16 @@
 		<div class="hunt-infos">
 			<div class="container pokemon-encounter">
 				<div class="input-group input-group-lg justify-content-center">
-					<div class="input-group-prepend">
-						<span class="input-group-text">Encounters</span>
+					<div class="input-group-prepend"
+					     title="Click to copy file path"
+					>
+						<label class="input-group-text action-container">
+							<span>Encounters</span>
+							<fa-icon [icon]="['fas', 'folder']"
+							         class="action-icon folder-icon fa-sm"
+							>
+							</fa-icon>
+						</label>
 					</div>
 					<div class="form-control-full">
 						<span id="hunt-encounter">{{hunt.encounterNumber}}</span>
@@ -41,8 +49,16 @@
 			<div class="container shiny-rate">
 				<div class="justify-content-center">
 					<div class="input-group output">
-						<div class="input-group-prepend">
-							<label class="input-group-text shiny-hunt-label">Chances</label>
+						<div class="input-group-prepend"
+						     title="Click to copy file path"
+						>
+							<label class="input-group-text shiny-hunt-label action-container">
+								<span>Chances</span>
+								<fa-icon [icon]="['fas', 'folder']"
+								         class="action-icon folder-icon fa-xs"
+								>
+								</fa-icon>
+							</label>
 						</div>
 						<span class="form-control text-center" id="shiny-chances">{{calculateProbability()}}%</span>
 					</div>

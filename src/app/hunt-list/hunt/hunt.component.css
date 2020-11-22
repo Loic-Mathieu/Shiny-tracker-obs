@@ -33,7 +33,7 @@
     text-align: center;
 }
 .form-control-full span {
-    margin-top: 15px;
+    margin-top: 40px;
 
     display: inline-block;
     vertical-align: middle;
@@ -61,4 +61,12 @@
 
 #shiny-rate {
     font-style: italic;
+}
+
+.action-container .folder-icon {
+    visibility: hidden;
+}
+
+.action-container:hover .folder-icon {
+    visibility: visible;
 }
