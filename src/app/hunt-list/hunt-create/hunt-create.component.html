@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Create</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+	<div class="input-group">
+		<mat-form-field>
+			<input matInput
+			       placeholder="Hunt name"
+			       formControlName="name"
+			>
+		</mat-form-field>
+	</div>
+
+	<div class="input-group">
+		<mat-form-field>
+			<input matInput
+			       type="number"
+			       placeholder="Encounter number"
+			       formControlName="encounters"
+			>
+		</mat-form-field>
+	</div>
+
+	<div class="input-group">
+		<mat-form-field>
+			<input matInput
+			       type="number"
+			       placeholder="Odds to find"
+			       formControlName="odds"
+			>
+		</mat-form-field>
+	</div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<button class="btn btn-light" (click)="cancel()">Cancel</button>
+	<button class="btn btn-success" (click)="save()">Save</button>
+</mat-dialog-actions>

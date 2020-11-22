@@ -1,5 +1,8 @@
 <div>
     <h2>Current hunts</h2>
+    <button class="btn btn-light" title="Add new hunt" (click)="createHunt()">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+    </button>
     <div id="hunt-list">
         <div class="hunt-wrapper"
              *ngFor="let hunt of hunts">

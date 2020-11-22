@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Hunt} from './hunt';
+import {Hunt} from '../hunt';
 import {FileService} from '../../service/file.service';
 import {FileType} from '../../options/fileType';
 
@@ -23,8 +23,8 @@ export class HuntComponent implements OnInit {
 
     /**
      * Shiny Pokémon = {1}
-     * P[Shiny] = 1 / <hunt.odds>
      * Non shiny Pokémon = {2, 3, 4, ..., <hunt.odds>}
+     * P[Shiny] = 1 / <hunt.odds>
      * P[Non Shiny] = (1 - P[shiny])
      *
      * N = <hunt.encounterNumber>

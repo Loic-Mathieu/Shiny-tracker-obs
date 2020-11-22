@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Hunt} from './hunt/hunt';
+import {Hunt} from './hunt';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {HuntCreateComponent} from './hunt-create/hunt-create.component';
 
 @Component({
     selector: 'app-hunt-list',
@@ -10,33 +12,25 @@ export class HuntListComponent implements OnInit {
 
     hunts: Hunt[];
 
-    constructor() { }
+    constructor(private dialog: MatDialog) { }
 
     ngOnInit(): void {
         this.initHunts();
     }
 
-    // Temp
+    public createHunt(): void {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+
+        const dialogRef = this.dialog.open(HuntCreateComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe(result => {
+            this.hunts.push(result.data);
+        });
+    }
+
     private initHunts(): void {
-        this.hunts = [
-            {
-                name: 'TEST-A',
-                enabled: true,
-                encounterNumber: 12,
-                odds: 100
-            },
-            {
-                name: 'TEST-B',
-                enabled: true,
-                encounterNumber: 60,
-                odds: 100
-            },
-            {
-                name: 'TEST-C',
-                enabled: true,
-                encounterNumber: 42,
-                odds: 100
-            },
-        ];
+        this.hunts = [];
     }
 }
