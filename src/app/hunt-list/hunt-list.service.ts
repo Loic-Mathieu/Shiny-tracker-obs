@@ -18,7 +18,7 @@ export class HuntListService {
 
 	public getHunts(): Promise<Hunt[]> {
 		return new Promise<Hunt[]>(resolve => {
-			resolve([]);
+			resolve(this.electronServiceInstance.ipcRenderer.sendSync('GET_HUNTS'));
 		});
 	}
 }

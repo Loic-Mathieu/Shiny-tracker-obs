@@ -122,6 +122,11 @@ ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
 	});
 })
 
+ipcMain.on('GET_HUNTS', (event) => {
+	let hunts = huntStore.get('hunts');
+	event.returnValue = hunts;
+})
+
 ipcMain.on('POST_HUNT', (event, arg) => {
 	let hunts = huntStore.get('hunts');
 	hunts.push(arg.hunt);
