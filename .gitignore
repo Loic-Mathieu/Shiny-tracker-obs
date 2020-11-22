@@ -8,7 +8,7 @@
 /bazel-out
 
 # Prod build
-/shiny-tracker-tool-win32-x64
+/prod_build/
 
 # dependencies
 /node_modules
