@@ -7,6 +7,9 @@
 # Only exists if Bazel was run
 /bazel-out
 
+# Prod build
+/shiny-tracker-tool-win32-x64
+
 # dependencies
 /node_modules
 
