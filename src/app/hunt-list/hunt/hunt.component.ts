@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Hunt} from '../hunt';
 import {FileService} from '../../service/file.service';
 import {FileType} from '../../options/fileType';
+import {HuntListService} from '../hunt-list.service';
 
 @Component({
     selector: 'app-hunt',
@@ -16,7 +17,8 @@ export class HuntComponent implements OnInit {
     @Input()
     toggled: boolean;
 
-    constructor(private fileService: FileService) { }
+    constructor(private huntService: HuntListService,
+                private fileService: FileService) { }
 
     ngOnInit(): void {
     }
@@ -51,7 +53,8 @@ export class HuntComponent implements OnInit {
     private updateFiles(): void {
         Promise.all([
             this.fileService.write(this.hunt.name, FileType.ENCOUNTER_TRACKER, this.hunt.encounterNumber),
-            this.fileService.write(this.hunt.name, FileType.ODDS, this.calculateProbability())
+            this.fileService.write(this.hunt.name, FileType.ODDS, this.calculateProbability()),
+            this.huntService.save(this.hunt)
         ])
             .then(result => console.log('OK'))
             .catch(error => console.error('BAAAD', error));

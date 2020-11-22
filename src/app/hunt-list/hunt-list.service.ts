@@ -16,6 +16,13 @@ export class HuntListService {
 		});
 	}
 
+	public save(hunt: Hunt): Promise<boolean> {
+		return new Promise<boolean>(resolve => {
+			this.electronServiceInstance.ipcRenderer.send('PUT_HUNT', {hunt});
+			resolve(true);
+		});
+	}
+
 	public getHunts(): Promise<Hunt[]> {
 		return new Promise<Hunt[]>(resolve => {
 			resolve(this.electronServiceInstance.ipcRenderer.sendSync('GET_HUNTS'));
