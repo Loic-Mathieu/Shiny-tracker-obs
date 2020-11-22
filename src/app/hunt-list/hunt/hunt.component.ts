@@ -11,14 +11,29 @@ import {HuntListService} from '../hunt-list.service';
 })
 export class HuntComponent implements OnInit {
 
+    constructor(private huntService: HuntListService,
+                private fileService: FileService) {
+    }
+
     @Input()
     hunt: Hunt;
 
     @Input()
     toggled: boolean;
 
-    constructor(private huntService: HuntListService,
-                private fileService: FileService) { }
+    static copyToClipBoard(message: string): void {
+        const selBox = document.createElement('textarea');
+        selBox.style.position = 'fixed';
+        selBox.style.left = '0';
+        selBox.style.top = '0';
+        selBox.style.opacity = '0';
+        selBox.value = message;
+        document.body.appendChild(selBox);
+        selBox.focus();
+        selBox.select();
+        document.execCommand('copy');
+        document.body.removeChild(selBox);
+    }
 
     ngOnInit(): void {
     }
@@ -40,12 +55,12 @@ export class HuntComponent implements OnInit {
         return (shinyChances * 100).toFixed(2);
     }
 
-    increaseEncounterNumber(): void {
+    public increaseEncounterNumber(): void {
         this.hunt.encounterNumber++;
         this.updateFiles();
     }
 
-    decreaseEncounterNumber(): void {
+    public decreaseEncounterNumber(): void {
         this.hunt.encounterNumber--;
         this.updateFiles();
     }
@@ -58,5 +73,17 @@ export class HuntComponent implements OnInit {
         ])
             .then(result => console.log('OK'))
             .catch(error => console.error('BAAAD', error));
+    }
+
+    public getEncounterPath(): void {
+        this.fileService.getSavePath(this.hunt.name, FileType.ENCOUNTER_TRACKER).then(path => {
+            HuntComponent.copyToClipBoard(path);
+        });
+    }
+
+    public getChancesPath(): void {
+        this.fileService.getSavePath(this.hunt.name, FileType.ODDS).then(path => {
+            HuntComponent.copyToClipBoard(path);
+        });
     }
 }

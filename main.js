@@ -111,7 +111,7 @@ app.on('activate', function () {
 /*	=====	API	=====	*/
 ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
 	let folderPath = saveStore.get('path') + '\\' + arg.hunt;
-	if (!fs.existsSync(folderPath)){
+	if (!fs.existsSync(folderPath)) {
 		fs.mkdirSync(folderPath);
 	}
 
@@ -120,6 +120,10 @@ ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
 	fs.writeFile(fullPath, arg.content, err => {
 		console.log(err);
 	});
+})
+
+ipcMain.on('GET_SAVE_PATH', (event) => {
+	event.returnValue = saveStore.get('path');
 })
 
 ipcMain.on('GET_HUNTS', (event) => {

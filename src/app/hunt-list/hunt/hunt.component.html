@@ -25,7 +25,7 @@
 					<div class="input-group-prepend"
 					     title="Click to copy file path"
 					>
-						<label class="input-group-text action-container">
+						<label (click)="getEncounterPath()" class="input-group-text action-container">
 							<span>Encounters</span>
 							<fa-icon [icon]="['fas', 'folder']"
 							         class="action-icon folder-icon fa-sm"
@@ -52,7 +52,8 @@
 						<div class="input-group-prepend"
 						     title="Click to copy file path"
 						>
-							<label class="input-group-text shiny-hunt-label action-container">
+							<label (click)="getChancesPath()"
+							       class="input-group-text shiny-hunt-label action-container">
 								<span>Chances</span>
 								<fa-icon [icon]="['fas', 'folder']"
 								         class="action-icon folder-icon fa-xs"

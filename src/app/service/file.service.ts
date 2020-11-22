@@ -1,13 +1,21 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FileType} from '../options/fileType';
 import {ElectronService} from 'ngx-electron';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class FileService {
 
-    constructor(private electronServiceInstance: ElectronService) { }
+    constructor(private electronServiceInstance: ElectronService) {
+    }
+
+    getSavePath(huntName: string, fileType: FileType): Promise<string> {
+        return new Promise<string>(resolve => {
+            const path = this.electronServiceInstance.ipcRenderer.sendSync('GET_SAVE_PATH');
+            resolve(`${path}\\${huntName}\\${fileType}`);
+        });
+    }
 
     read(huntName: string, fileType: FileType): Promise<string> {
         return null;
