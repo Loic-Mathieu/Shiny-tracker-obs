@@ -63,10 +63,32 @@
     font-style: italic;
 }
 
+.action-container {
+    position: relative;
+}
+
 .action-container .folder-icon {
-    visibility: hidden;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}
+
+.action-container .folder-icon {
+    opacity: 0;
 }
 
 .action-container:hover .folder-icon {
-    visibility: visible;
+    animation-name: hover-icon;
+    animation-duration: 1s;
+    animation-direction: normal;
+    opacity: 1;
+}
+
+@keyframes hover-icon {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
