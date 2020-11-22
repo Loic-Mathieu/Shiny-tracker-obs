@@ -110,6 +110,10 @@ app.on('activate', function () {
 
 /*	=====	API	=====	*/
 ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
+	if (!fs.existsSync(saveStore.get('path'))) {
+		fs.mkdirSync(saveStore.get('path'));
+	}
+
 	let folderPath = saveStore.get('path') + '\\' + arg.hunt;
 	if (!fs.existsSync(folderPath)) {
 		fs.mkdirSync(folderPath);
