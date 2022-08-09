@@ -1,31 +1,30 @@
-import { Injectable } from '@angular/core';
-import {ElectronService} from 'ngx-electron';
-import {Hunt} from './hunt';
+import {Injectable} from '@angular/core';
+import {Hunt} from '../models/hunt';
+import {DatabaseService} from '../service/database.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class HuntListService {
 
-	constructor(private electronServiceInstance: ElectronService) { }
-
-	public addHunt(hunt: Hunt): Promise<boolean> {
-		return new Promise<boolean>(resolve => {
-			this.electronServiceInstance.ipcRenderer.send('POST_HUNT', {hunt});
-			resolve(true);
-		});
+	constructor(private databaseService: DatabaseService) {
 	}
 
-	public save(hunt: Hunt): Promise<boolean> {
-		return new Promise<boolean>(resolve => {
-			this.electronServiceInstance.ipcRenderer.send('PUT_HUNT', {hunt});
-			resolve(true);
+	public save(hunt: Hunt): Promise<void | Hunt> {
+		return this.databaseService.connection.then(() => {
+			hunt.save().then(response => response);
 		});
 	}
 
 	public getHunts(): Promise<Hunt[]> {
-		return new Promise<Hunt[]>(resolve => {
-			resolve(this.electronServiceInstance.ipcRenderer.sendSync('GET_HUNTS'));
+		return this.databaseService.connection.then(() => {
+			return Hunt.find();
+		});
+	}
+
+	public deleteHunt(hunt: Hunt): Promise<boolean> {
+		return this.databaseService.connection.then(() => {
+			return hunt.remove().then(response => true);
 		});
 	}
 }

@@ -37,13 +37,6 @@ const saveStore = new Store({
 	}
 });
 
-const huntStore = new Store({
-	configName: 'hunts',
-	data: {
-		hunts: [],
-	}
-});
-
 const preferencesStore = new Store({
 	configName: 'preferences',
 	data: {
@@ -128,32 +121,4 @@ ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
 
 ipcMain.on('GET_SAVE_PATH', (event) => {
 	event.returnValue = saveStore.get('path');
-})
-
-ipcMain.on('GET_HUNTS', (event) => {
-	event.returnValue = huntStore.get('hunts');
-})
-
-ipcMain.on('POST_HUNT', (event, arg) => {
-	let hunts = huntStore.get('hunts');
-	hunts.push(arg.hunt);
-	huntStore.set('hunts', hunts);
-})
-
-ipcMain.on('PUT_HUNT', (event, arg) => {
-	let hunts = huntStore.get('hunts');
-
-	let updatedHunt = arg.hunt;
-	let index = hunts.findIndex(hunt => hunt.name === updatedHunt.name);
-
-	if (index >= 0) {
-		hunts[index].name = updatedHunt.name;
-		hunts[index].encounterNumber = updatedHunt.encounterNumber;
-		hunts[index].odds = updatedHunt.odds;
-		hunts[index].enabled = updatedHunt.enabled;
-	}
-
-	console.log('updated');
-
-	huntStore.set('hunts', hunts);
 })

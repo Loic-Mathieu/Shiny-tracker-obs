@@ -9,8 +9,8 @@
 	<div class="card-body hunt-body">
 		<div class="hunt-tools">
 			<div class="hunt-actions">
-				<fa-icon [icon]="['fas', 'edit']"></fa-icon>
-				<fa-icon [icon]="['fas', 'eraser']"></fa-icon>
+				<fa-icon (click)="onEdit()" [icon]="['fas', 'edit']"></fa-icon>
+				<fa-icon (click)="onDelete()" [icon]="['fas', 'eraser']"></fa-icon>
 			</div>
 
 			<div class="hunt-options">

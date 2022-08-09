@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Hunt} from '../hunt';
+import {Hunt} from '../../models/hunt';
 import {FileService} from '../../service/file.service';
 import {FileType} from '../../options/fileType';
 import {HuntListService} from '../hunt-list.service';
@@ -85,5 +85,13 @@ export class HuntComponent implements OnInit {
         this.fileService.getSavePath(this.hunt.name, FileType.ODDS).then(path => {
             HuntComponent.copyToClipBoard(path);
         });
+    }
+
+    public onEdit(): void {
+        // TODO
+    }
+
+    public onDelete(): void {
+        // TODO this.emit()
     }
 }

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Hunt} from '../hunt';
+import {Hunt} from '../../models/hunt';
 
 @Component({
     selector: 'app-hunt-create',
