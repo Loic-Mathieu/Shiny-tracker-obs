@@ -1,9 +1,15 @@
-<div>
-    <h2>Current hunts</h2>
-    <button class="btn btn-light" title="Add new hunt" (click)="createHunt()">
-        <span style="padding-right: 3px">Add</span>
-        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
-    </button>
+<div class="container-fluid" style="margin-bottom: 5px;">
+    <div class="row">
+        <div class="col">
+            <h1>Current hunts</h1></div>
+        <div class="col"></div>
+        <div class="col">
+            <button (click)="createHunt()" class="btn btn-light" mat-raised-button title="Add new hunt">
+                <span style="padding-right: 3px">Add</span>
+                <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+            </button>
+        </div>
+    </div>
     <mat-accordion id="hunt-list" multi>
         <ng-container *ngFor="let hunt of hunts">
             <app-hunt (deleteEvent)="removeHunt($event)" (editEvent)="editHunt($event)"

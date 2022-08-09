@@ -14,6 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
         ReactiveFormsModule,
         MatInputModule,
         MatButtonModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatToolbarModule,
+        MatTabsModule
     ],
     providers: [
     ],
