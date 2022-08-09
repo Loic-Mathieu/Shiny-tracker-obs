@@ -1,17 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { HuntListComponent } from './hunt-list/hunt-list.component';
-import { HuntComponent } from './hunt-list/hunt/hunt.component';
+import {AppComponent} from './app.component';
+import {HuntListComponent} from './hunt-list/hunt-list.component';
+import {HuntComponent} from './hunt-list/hunt/hunt.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgxElectronModule} from 'ngx-electron';
-import { HuntCreateComponent } from './hunt-list/hunt-create/hunt-create.component';
+import {HuntCreateComponent} from './hunt-list/hunt-create/hunt-create.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         BrowserAnimationsModule,
         MatFormFieldModule,
         ReactiveFormsModule,
-        MatInputModule
+        MatInputModule,
+        MatButtonModule,
+        MatExpansionModule
     ],
     providers: [
     ],

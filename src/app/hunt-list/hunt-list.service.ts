@@ -12,7 +12,7 @@ export class HuntListService {
 
 	public save(hunt: Hunt): Promise<void | Hunt> {
 		return this.databaseService.connection.then(() => {
-			hunt.save().then(response => response);
+			return hunt.save().then(response => response);
 		});
 	}
 

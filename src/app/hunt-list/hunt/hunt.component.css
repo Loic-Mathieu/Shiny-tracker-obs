@@ -13,14 +13,6 @@
     justify-content: start;
 }
 
-.hunt-tools .hunt-options {
-    margin-left: auto;
-}
-
-.hunt-tools .hunt-actions > * {
-    margin-right: 15px;
-}
-
 .output {
     margin: 8px;
 }

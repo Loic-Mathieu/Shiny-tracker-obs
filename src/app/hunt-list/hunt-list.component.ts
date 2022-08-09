@@ -38,10 +38,18 @@ export class HuntListComponent implements OnInit {
         });
     }
 
-    public removeHunt(): void {
-        this.huntService.deleteHunt(null).then(response => {
+    public removeHunt(hunt: Hunt): void {
+        this.huntService.deleteHunt(hunt).then(response => {
             if (response) {
+                this.initHunts();
+            }
+        });
+    }
 
+    public editHunt(hunt: Hunt): void {
+        this.huntService.save(hunt).then(response => {
+            if (response) {
+                this.initHunts();
             }
         });
     }

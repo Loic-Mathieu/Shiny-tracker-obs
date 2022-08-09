@@ -1,24 +1,10 @@
-<div class="card">
-	<div class="card-header hunt-header">
-		<h4 id="hunt-title" class="card-title">{{hunt.name}}</h4>
-		<div class="toggle-button">
-			<fa-icon [icon]="['fas', 'chevron-up']" size="2x" *ngIf="!toggled"></fa-icon>
-			<fa-icon [icon]="['fas', 'chevron-down']" size="2x" *ngIf="toggled"></fa-icon>
-		</div>
-	</div>
-	<div class="card-body hunt-body">
-		<div class="hunt-tools">
-			<div class="hunt-actions">
-				<fa-icon (click)="onEdit()" [icon]="['fas', 'edit']"></fa-icon>
-				<fa-icon (click)="onDelete()" [icon]="['fas', 'eraser']"></fa-icon>
-			</div>
-
-			<div class="hunt-options">
-				<fa-icon [icon]="['fas', 'cog']"></fa-icon>
-			</div>
-		</div>
-
-		<br>
+<mat-expansion-panel>
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			<h4 id="hunt-title">{{hunt.name}}</h4>
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+	<div class="hunt-body">
 		<div class="hunt-infos">
 			<div class="container pokemon-encounter">
 				<div class="input-group input-group-lg justify-content-center">
@@ -73,4 +59,19 @@
 			</div>
 		</div>
 	</div>
-</div>
+	<mat-action-row>
+		<div class="hunt-tools">
+			<div class="hunt-actions">
+				<button (click)="onEdit()" mat-icon-button>
+					<fa-icon [icon]="['fas', 'edit']"></fa-icon>
+				</button>
+				<button (click)="onDelete()" mat-icon-button>
+					<fa-icon [icon]="['fas', 'eraser']"></fa-icon>
+				</button>
+				<button mat-icon-button>
+					<fa-icon [icon]="['fas', 'cog']"></fa-icon>
+				</button>
+			</div>
+		</div>
+	</mat-action-row>
+</mat-expansion-panel>

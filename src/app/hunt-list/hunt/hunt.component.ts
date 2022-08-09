@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Hunt} from '../../models/hunt';
 import {FileService} from '../../service/file.service';
 import {FileType} from '../../options/fileType';
@@ -20,6 +20,12 @@ export class HuntComponent implements OnInit {
 
     @Input()
     toggled: boolean;
+
+    @Output()
+    editEvent: EventEmitter<Hunt> = new EventEmitter<Hunt>();
+
+    @Output()
+    deleteEvent: EventEmitter<Hunt> = new EventEmitter<Hunt>();
 
     static copyToClipBoard(message: string): void {
         const selBox = document.createElement('textarea');
@@ -88,10 +94,10 @@ export class HuntComponent implements OnInit {
     }
 
     public onEdit(): void {
-        // TODO
+        this.editEvent.emit(this.hunt);
     }
 
     public onDelete(): void {
-        // TODO this.emit()
+        this.deleteEvent.emit(this.hunt);
     }
 }
