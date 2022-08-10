@@ -16,6 +16,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
+import {HttpClientModule} from '@angular/common/http';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatOptionModule} from '@angular/material/core';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
     declarations: [
@@ -36,7 +40,11 @@ import {MatTabsModule} from '@angular/material/tabs';
         MatButtonModule,
         MatExpansionModule,
         MatToolbarModule,
-        MatTabsModule
+        MatTabsModule,
+        HttpClientModule,
+        MatAutocompleteModule,
+        MatOptionModule,
+        MatDividerModule
     ],
     providers: [
     ],

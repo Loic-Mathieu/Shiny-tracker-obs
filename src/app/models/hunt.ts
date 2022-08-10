@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity({name: 'hunt'})
 export class Hunt extends BaseEntity {
@@ -11,13 +11,13 @@ export class Hunt extends BaseEntity {
 	/**
 	 * Name of the hunt
 	 */
-	@Column()
+	@Column({unique: true})
 	name: string;
 
 	/**
 	 * Number of time the pokémon was encountered
 	 */
-	@Column()
+	@Column({default: 0})
 	encounterNumber: number;
 
 	/**
@@ -29,6 +29,31 @@ export class Hunt extends BaseEntity {
 	/**
 	 * Whether the hunt is displayed or not
 	 */
-	@Column()
+	@Column('boolean', {default: true})
 	enabled: boolean;
+
+	/**
+	 * Creation date
+	 */
+	@CreateDateColumn()
+	startDate: Date;
+
+	/* ===== Saved PokeAPI data ===== */
+	/**
+	 * Reference to the Pokémon data
+	 */
+	@Column({nullable: true})
+	pokemonId: number;
+
+	/**
+	 * The Pokémon name
+	 */
+	@Column({nullable: true})
+	pokemonName: string;
+
+	/**
+	 * Shiny sprite
+	 */
+	@Column({nullable: true})
+	pokemonSprite: string;
 }

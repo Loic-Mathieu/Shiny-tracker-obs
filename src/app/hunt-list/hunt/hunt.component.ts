@@ -3,6 +3,7 @@ import {Hunt} from '../../models/hunt';
 import {FileService} from '../../service/file.service';
 import {FileType} from '../../options/fileType';
 import {HuntListService} from '../hunt-list.service';
+import {PokeApiService} from '../../service/pokeapi.service';
 
 @Component({
     selector: 'app-hunt',
@@ -12,7 +13,8 @@ import {HuntListService} from '../hunt-list.service';
 export class HuntComponent implements OnInit {
 
     constructor(private huntService: HuntListService,
-                private fileService: FileService) {
+                private fileService: FileService,
+                private pokeApiService: PokeApiService) {
     }
 
     @Input()

@@ -28,6 +28,10 @@ export class HuntListComponent implements OnInit {
 
         const dialogRef = this.dialog.open(HuntCreateComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
+            if (!result) {
+                return;
+            }
+
             this.huntService.save(result.data).then(newHunt => {
                 if (newHunt instanceof Hunt) {
                     this.hunts.push(newHunt);

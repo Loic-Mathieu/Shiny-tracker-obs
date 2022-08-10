@@ -11,6 +11,23 @@
 		</mat-form-field>
 	</div>
 
+	<mat-divider></mat-divider>
+	<div class="input-group">
+		<mat-form-field>
+			<input [matAutocomplete]="auto"
+			       formControlName="pokemon"
+			       matInput
+			       placeholder="Pokemon"
+			>
+		</mat-form-field>
+		<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+			<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+				{{option.name}}
+			</mat-option>
+		</mat-autocomplete>
+	</div>
+
+	<mat-divider></mat-divider>
 	<div class="input-group">
 		<mat-form-field>
 			<input matInput
@@ -35,5 +52,5 @@
 
 <mat-dialog-actions>
 	<button class="btn btn-light" (click)="cancel()">Cancel</button>
-	<button class="btn btn-success" (click)="save()">Save</button>
+	<button (click)="save()" [disabled]="!form.valid" class="btn btn-success">Save</button>
 </mat-dialog-actions>
