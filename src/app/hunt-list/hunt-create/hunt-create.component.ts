@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Hunt} from '../../models/hunt';
-import {NamedResource} from '../../models/pokemon.interface';
+import {NamedResource, NamedResourceList} from '../../models/pokemon.interface';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {PokeApiService} from '../../service/pokeapi.service';
@@ -17,16 +17,16 @@ export class HuntCreateComponent implements OnInit {
     form: FormGroup;
 
     filteredOptions: Observable<NamedResource[]>;
-    pokemonOptions: NamedResource[] = [
-        {name: 'suicune', url: 'https://pokeapi.co/api/v2/pokemon/237'},
-        {name: 'celebi', url: 'https://pokeapi.co/api/v2/pokemon/251'},
-        {name: 'pikachu', url: 'https://pokeapi.co/api/v2/pokemon/30'}
-    ];
+    pokemonResourceList: NamedResourceList = null;
 
     constructor(private formBuilder: FormBuilder,
                 private pokeApiService: PokeApiService,
                 private dialogRef: MatDialogRef<HuntCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private data) {
+    }
+
+    public get pokemonOptions(): NamedResource[] {
+        return this.pokemonResourceList.results;
     }
 
     ngOnInit(): void {
@@ -38,18 +38,21 @@ export class HuntCreateComponent implements OnInit {
             odds: [0, Validators.required],
         });
 
-        // TODO rework filter to make it cleaner
-        this.filteredOptions = this.form.get('pokemon').valueChanges.pipe(
-            startWith(''),
-            map(value => {
-                if (!value) {
-                    return this.pokemonOptions;
-                }
+        // TODO Optimize fetching and load more if needed
+        this.fetchNextOptions().then(() => {
+            // TODO rework filter to make it cleaner
+            this.filteredOptions = this.form.get('pokemon').valueChanges.pipe(
+                startWith(''),
+                map(value => {
+                    if (!value) {
+                        return this.pokemonOptions;
+                    }
 
-                const searchValue = typeof value === 'string' ? value : value.name;
-                return this.filter(searchValue);
-            }),
-        );
+                    const searchValue = typeof value === 'string' ? value : value.name;
+                    return this.filter(searchValue);
+                }),
+            );
+        });
     }
 
     public save(): void {
@@ -86,6 +89,27 @@ export class HuntCreateComponent implements OnInit {
 
     displayFn(user: NamedResource): string {
         return user && user.name ? user.name : '';
+    }
+
+    private fetchNextOptions(): Promise<void> {
+        return new Promise<void>(resolve => {
+            if (!this.pokemonResourceList) {
+                // Fetch first results
+                this.pokeApiService.findPokemon().then(resourceList => {
+                    this.pokemonResourceList = resourceList;
+                    resolve();
+                });
+            } else if (!this.pokemonResourceList.next) {
+                // No more results
+                resolve();
+            } else {
+                // Push new results
+                this.pokeApiService.findResourceListByUri(this.pokemonResourceList.next).then(resourceList => {
+                    this.pokemonResourceList.results.push(...resourceList.results);
+                    resolve();
+                });
+            }
+        });
     }
 
     private filter(value: string): NamedResource[] {

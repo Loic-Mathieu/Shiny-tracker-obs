@@ -57,4 +57,12 @@ export class PokeApiService {
 		return this.http.get<PokemonDetails>(`${this.pokeApiUrl}/pokemon-species/${dexId}`).toPromise();
 	}
 
+	/**
+	 * Gets next resource list by uri
+	 * @param uri the uri of the REST endpoint
+	 */
+	findResourceListByUri(uri: string): Promise<NamedResourceList> {
+		return this.http.get<NamedResourceList>(uri).toPromise();
+	}
+
 }
