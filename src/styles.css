@@ -1,5 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.action-row button {
+    margin-right: 8px;
+}
+
+.header {
+    position: relative;
+}
+
+.header .header-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.centered-image {
+    display: block;
+    margin: auto;
+}

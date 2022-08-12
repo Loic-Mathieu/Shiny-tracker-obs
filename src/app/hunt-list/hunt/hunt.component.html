@@ -1,64 +1,95 @@
 <mat-expansion-panel>
 	<mat-expansion-panel-header>
-		<mat-panel-title>
-			<h4 id="hunt-title">{{hunt.name}}</h4>
-		</mat-panel-title>
-	</mat-expansion-panel-header>
-	<div class="hunt-body">
-		<img [alt]="hunt.pokemonName" [src]="hunt.pokemonSprite">
-		<div class="hunt-infos">
-			<div class="container pokemon-encounter">
-				<div class="input-group input-group-lg justify-content-center">
-					<div class="input-group-prepend"
-					     title="Click to copy file path"
-					>
-						<label (click)="getEncounterPath()" class="input-group-text action-container">
-							<span>Encounters</span>
-							<fa-icon [icon]="['fas', 'folder']"
-							         class="action-icon folder-icon fa-sm"
-							>
-							</fa-icon>
-						</label>
-					</div>
-					<div class="form-control-full">
-						<span id="hunt-encounter">{{hunt.encounterNumber}}</span>
-					</div>
-					<div class="btn-group-vertical">
-						<button class="btn btn-success btn-block" (click)="increaseEncounterNumber()">
-							<fa-icon [icon]="['fas', 'plus']"></fa-icon>
-						</button>
-						<button class="btn btn-danger btn-block" (click)="decreaseEncounterNumber()">
-							<fa-icon [icon]="['fas', 'minus']"></fa-icon>
-						</button>
-					</div>
-				</div>
-			</div>
-			<div class="container shiny-rate">
-				<div class="justify-content-center">
-					<div class="input-group output">
-						<div class="input-group-prepend"
-						     title="Click to copy file path"
-						>
-							<label (click)="getChancesPath()"
-							       class="input-group-text shiny-hunt-label action-container">
-								<span>Chances</span>
-								<fa-icon [icon]="['fas', 'folder']"
-								         class="action-icon folder-icon fa-xs"
-								>
-								</fa-icon>
-							</label>
-						</div>
-						<span class="form-control text-center" id="shiny-chances">{{calculateProbability()}}%</span>
-					</div>
-					<div class="input-group output">
-						<div class="input-group-prepend">
-							<span class="input-group-text shiny-hunt-label">Rate</span>
-						</div>
-						<span class="form-control text-center" id="shiny-rate">1 / {{hunt.odds}}</span>
-					</div>
-				</div>
+		<div class="container-fluid">
+			<div class="row">
+				<mat-panel-title class="col-4">
+					<h3 id="hunt-title">{{hunt.name}}</h3>
+				</mat-panel-title>
+				<mat-panel-description class="col">
+					<h4 id="hunt-start-date">{{hunt.startDate}}</h4>
+				</mat-panel-description>
 			</div>
 		</div>
+	</mat-expansion-panel-header>
+	<div class="container-lg hunt-body">
+		<mat-grid-list cols="3" gutterSize="2px" rowHeight="100px">
+			<!-- Shiny sprite and counter -->
+			<mat-grid-tile [colspan]="2" [rowspan]="2" id="hunt-encounter-tracker-tile">
+				<div class="container-fluid">
+					<div class="row mat-figure">
+						<!-- Sprite -->
+						<div class="col">
+							<div class="justify-content-center">
+								<img [alt]="hunt.pokemonName" [src]="hunt.pokemonSprite" class="centered-image"
+								     width="200px">
+							</div>
+						</div>
+						<!-- Counter -->
+						<div class="col">
+							<div class="input-group input-group-lg justify-content-center">
+								<div class="input-group-prepend" title="Click to copy file path">
+									<label (click)="getEncounterPath()" class="input-group-text action-container">
+										<span>Encounters</span>
+										<fa-icon [icon]="['fas', 'folder']"
+										         class="action-icon folder-icon fa-xs"></fa-icon>
+									</label>
+								</div>
+								<span class="form-control text-center"
+								      id="hunt-encounter">{{hunt.encounterNumber}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</mat-grid-tile>
+
+			<!-- Infos -->
+			<mat-grid-tile [colspan]="1" [rowspan]="3" class="hunt-stats" id="hunt-info-tile">
+				<mat-grid-tile-header class="header">
+					<h5>Stats</h5>
+					<div class="header-actions">
+						<button mat-icon-button>
+							<fa-icon [icon]="['fas', 'cog']"></fa-icon>
+						</button>
+					</div>
+				</mat-grid-tile-header>
+				<div class="container-fluid" style="padding: 20px;">
+					<div class="row">
+						<div class="input-group output">
+							<div class="input-group-prepend" title="Click to copy file path">
+								<label (click)="getChancesPath()"
+								       class="input-group-text shiny-hunt-label action-container">
+									<span>Chances</span>
+									<fa-icon [icon]="['fas', 'folder']" class="action-icon folder-icon fa-xs"></fa-icon>
+								</label>
+							</div>
+							<span class="form-control text-center" id="shiny-chances">{{calculateProbability()}}%</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-group output">
+							<div class="input-group-prepend">
+								<span class="input-group-text shiny-hunt-label">Rate</span>
+							</div>
+							<span class="form-control text-center" id="shiny-rate">1 / {{hunt.odds}}</span>
+						</div>
+					</div>
+				</div>
+			</mat-grid-tile>
+
+			<!-- Encounters actions -->
+			<mat-grid-tile [colspan]="2" [rowspan]="1" id="hunt-encounter-actions-tile">
+				<div class="container-fluid">
+					<mat-button-toggle-group style="width: 100%;">
+						<mat-button-toggle (click)="decreaseEncounterNumber()" class="action">
+							<fa-icon [icon]="['fas', 'minus']"></fa-icon>
+						</mat-button-toggle>
+						<mat-button-toggle (click)="increaseEncounterNumber()" class="action">
+							<fa-icon [icon]="['fas', 'plus']"></fa-icon>
+						</mat-button-toggle>
+					</mat-button-toggle-group>
+				</div>
+			</mat-grid-tile>
+		</mat-grid-list>
 	</div>
 	<mat-action-row>
 		<div class="hunt-tools">
@@ -68,9 +99,6 @@
 				</button>
 				<button (click)="onDelete()" mat-icon-button>
 					<fa-icon [icon]="['fas', 'eraser']"></fa-icon>
-				</button>
-				<button mat-icon-button>
-					<fa-icon [icon]="['fas', 'cog']"></fa-icon>
 				</button>
 			</div>
 		</div>

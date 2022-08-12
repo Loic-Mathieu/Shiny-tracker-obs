@@ -10,7 +10,7 @@
             </button>
         </div>
     </div>
-    <mat-accordion id="hunt-list" multi>
+    <mat-accordion class="headers-align" id="hunt-list" multi>
         <ng-container *ngFor="let hunt of hunts">
             <app-hunt (deleteEvent)="removeHunt($event)" (editEvent)="editHunt($event)"
                       [hunt]="hunt"

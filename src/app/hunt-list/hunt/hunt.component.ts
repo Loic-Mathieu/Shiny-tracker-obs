@@ -69,6 +69,9 @@ export class HuntComponent implements OnInit {
     }
 
     public decreaseEncounterNumber(): void {
+        if (this.hunt.encounterNumber === 0) {
+            return;
+        }
         this.hunt.encounterNumber--;
         this.updateFiles();
     }

@@ -20,34 +20,41 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatOptionModule} from '@angular/material/core';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HuntListComponent,
-        HuntComponent,
-        HuntCreateComponent
-    ],
-    imports: [
-        BrowserModule,
-        FontAwesomeModule,
-        NgxElectronModule,
-        MatDialogModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatButtonModule,
-        MatExpansionModule,
-        MatToolbarModule,
-        MatTabsModule,
-        HttpClientModule,
-        MatAutocompleteModule,
-        MatOptionModule,
-        MatDividerModule
-    ],
-    providers: [
-    ],
-    bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		HuntListComponent,
+		HuntComponent,
+		HuntCreateComponent
+	],
+	imports: [
+		BrowserModule,
+		FontAwesomeModule,
+		NgxElectronModule,
+		MatDialogModule,
+		BrowserAnimationsModule,
+		MatFormFieldModule,
+		ReactiveFormsModule,
+		MatInputModule,
+		MatButtonModule,
+		MatExpansionModule,
+		MatToolbarModule,
+		MatTabsModule,
+		HttpClientModule,
+		MatAutocompleteModule,
+		MatOptionModule,
+		MatDividerModule,
+		MatGridListModule,
+		MatButtonToggleModule,
+		MatCardModule,
+		MatListModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
