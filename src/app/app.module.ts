@@ -24,13 +24,17 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
+import {HuntInfosComponent} from './hunt-list/hunt/hunt-infos/hunt-infos.component';
+import {HuntOptionsComponent} from './hunt-list/hunt/hunt-options/hunt-options.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HuntListComponent,
 		HuntComponent,
-		HuntCreateComponent
+		HuntCreateComponent,
+		HuntInfosComponent,
+		HuntOptionsComponent
 	],
 	imports: [
 		BrowserModule,

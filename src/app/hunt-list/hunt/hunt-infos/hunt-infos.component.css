@@ -1,0 +1,71 @@
+.hunt-body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.shiny-hunt-label {
+    width: 100px;
+    display: inline-block;
+    text-align: center;
+}
+
+#hunt-title {
+    font-weight: bold;
+}
+
+#hunt-encounter {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+#shiny-chances {
+    font-style: italic;
+    font-weight: bold;
+}
+
+#shiny-rate {
+    font-style: italic;
+}
+
+.hunt-stats {
+    border-left: lightgray solid thin;
+    padding: 20px;
+}
+
+.hunt-stats .output {
+    margin-bottom: 8px;
+}
+
+.action-container {
+    position: relative;
+}
+
+.action-container .folder-icon {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}
+
+.action-container .folder-icon {
+    opacity: 0;
+}
+
+.action-container:hover .folder-icon {
+    animation-name: hover-icon;
+    animation-duration: 1s;
+    animation-direction: normal;
+    opacity: 1;
+}
+
+@keyframes hover-icon {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#hunt-encounter-actions-tile .action {
+    width: 355px;
+}
