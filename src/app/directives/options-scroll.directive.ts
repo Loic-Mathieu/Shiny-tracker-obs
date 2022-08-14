@@ -3,6 +3,13 @@ import {MatAutocomplete} from '@angular/material/autocomplete';
 import {Subject} from 'rxjs';
 import {takeUntil, tap} from 'rxjs/operators';
 
+/**
+ * ========================
+ * This directive was found here
+ * https://medium.com/@shelkarvijay94/angular-mat-autocomplete-with-infinite-scroll-1caca9aebccf
+ * ========================
+ */
+
 export interface IAutoCompleteScrollEvent {
 	autoComplete: MatAutocomplete;
 	scrollEvent: Event;
