@@ -12,9 +12,7 @@
     </div>
     <mat-accordion class="headers-align" id="hunt-list" multi>
         <ng-container *ngFor="let hunt of hunts">
-            <app-hunt (deleteEvent)="removeHunt($event)" (editEvent)="editHunt($event)"
-                      [hunt]="hunt"
-                      [toggled]="false"></app-hunt>
+            <app-hunt (deleteEvent)="removeHunt($event)" [hunt]="hunt" [toggled]="false"></app-hunt>
         </ng-container>
     </mat-accordion>
 </div>

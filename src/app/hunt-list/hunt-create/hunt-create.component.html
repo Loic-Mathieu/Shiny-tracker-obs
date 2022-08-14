@@ -1,56 +1,12 @@
 <h2 mat-dialog-title>Create</h2>
 
-<mat-dialog-content [formGroup]="form">
-
-	<div class="input-group">
-		<mat-form-field>
-			<input matInput
-			       placeholder="Hunt name"
-			       formControlName="name"
-			>
-		</mat-form-field>
-	</div>
-
-	<mat-divider></mat-divider>
-	<div class="input-group">
-		<mat-form-field>
-			<input [matAutocomplete]="auto"
-			       formControlName="pokemon"
-			       matInput
-			       placeholder="Pokemon"
-			>
-		</mat-form-field>
-		<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-			<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-				{{option.name}}
-			</mat-option>
-		</mat-autocomplete>
-	</div>
-
-	<mat-divider></mat-divider>
-	<div class="input-group">
-		<mat-form-field>
-			<input matInput
-			       type="number"
-			       placeholder="Encounter number"
-			       formControlName="encounters"
-			>
-		</mat-form-field>
-	</div>
-
-	<div class="input-group">
-		<mat-form-field>
-			<input matInput
-			       type="number"
-			       placeholder="Odds to find"
-			       formControlName="odds"
-			>
-		</mat-form-field>
-	</div>
-
+<mat-dialog-content>
+	<app-hunt-edit #editForm [displayStatOptions]="false"></app-hunt-edit>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-	<button class="btn btn-light" (click)="cancel()">Cancel</button>
-	<button (click)="save()" [disabled]="!form.valid" class="btn btn-success">Save</button>
+	<div class="action-row d-flex justify-content-end">
+		<button (click)="cancel()" mat-raised-button>Cancel</button>
+		<button (click)="save()" [disabled]="!canBeSaved" color="primary" mat-raised-button>Save</button>
+	</div>
 </mat-dialog-actions>

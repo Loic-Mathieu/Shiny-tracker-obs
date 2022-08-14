@@ -26,6 +26,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {HuntInfosComponent} from './hunt-list/hunt/hunt-infos/hunt-infos.component';
 import {HuntOptionsComponent} from './hunt-list/hunt/hunt-options/hunt-options.component';
+import {HuntEditComponent} from './hunt-list/hunt/hunt-edit/hunt-edit.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
 	declarations: [
@@ -34,7 +37,8 @@ import {HuntOptionsComponent} from './hunt-list/hunt/hunt-options/hunt-options.c
 		HuntComponent,
 		HuntCreateComponent,
 		HuntInfosComponent,
-		HuntOptionsComponent
+		HuntOptionsComponent,
+		HuntEditComponent
 	],
 	imports: [
 		BrowserModule,
@@ -56,7 +60,9 @@ import {HuntOptionsComponent} from './hunt-list/hunt/hunt-options/hunt-options.c
 		MatGridListModule,
 		MatButtonToggleModule,
 		MatCardModule,
-		MatListModule
+		MatListModule,
+		MatProgressSpinnerModule,
+		MatProgressBarModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
