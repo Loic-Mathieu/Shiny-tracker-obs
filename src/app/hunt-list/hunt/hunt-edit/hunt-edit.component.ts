@@ -87,10 +87,7 @@ export class HuntEditComponent implements OnInit {
 	}
 
 	public scroll(): void {
-		console.log('scroll');
-		this.pokeApiService.findPokemonList(true).toPromise().then(resourceList => {
-			this.pokemonResourceList = resourceList;
-		});
+		this.updateFilteredList(true);
 	}
 
 	private initForm(): void {

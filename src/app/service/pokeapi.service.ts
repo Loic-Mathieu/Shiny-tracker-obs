@@ -33,10 +33,8 @@ export class PokeApiService {
 	 */
 	findPokemonList(fetchNext: boolean = false): Observable<NamedResourceList> {
 		if (!this.cache.has(POKEMON_LIST)) {
-			console.log('I do not have data');
 			this.cache.set(POKEMON_LIST, this.http.get<NamedResourceList>(`${this.POKE_API_URL}/pokemon?limit=${DEFAULT_LIMIT}`));
 		} else if (fetchNext) {
-			console.log('Fetching next...');
 			this.cache.set(POKEMON_LIST, this.findNextResults(POKEMON_LIST));
 		}
 		return this.cache.get(POKEMON_LIST);

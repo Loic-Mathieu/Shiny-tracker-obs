@@ -46,6 +46,7 @@
     "ngx-electron": "^2.2.0",
     "popper.js": "1.16.1",
     "rxjs": "~6.6.0",
+    "rxjs-take-while-inclusive": "^2.1.1",
     "sqlite3": "^5.0.11",
     "tslib": "^2.0.0",
     "typeorm": "^0.2.29",

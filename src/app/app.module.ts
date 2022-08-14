@@ -29,6 +29,7 @@ import {HuntOptionsComponent} from './hunt-list/hunt/hunt-options/hunt-options.c
 import {HuntEditComponent} from './hunt-list/hunt/hunt-edit/hunt-edit.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {OptionsScrollDirective} from './directives/options-scroll.directive';
 
 @NgModule({
 	declarations: [
@@ -38,7 +39,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 		HuntCreateComponent,
 		HuntInfosComponent,
 		HuntOptionsComponent,
-		HuntEditComponent
+		HuntEditComponent,
+		OptionsScrollDirective
 	],
 	imports: [
 		BrowserModule,
