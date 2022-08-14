@@ -3,9 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {NamedResource, NamedResourceList, PokemonInterface} from '../../../models/pokemon.interface';
 import {PokeApiService} from '../../../service/pokeapi.service';
-import {map, startWith} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Hunt} from '../../../models/hunt';
 import SpriteUtils from '../../../utils/spriteUtils';
+import StringUtils from '../../../utils/stringUtils';
 
 @Component({
 	selector: 'app-hunt-edit',
@@ -14,15 +15,16 @@ import SpriteUtils from '../../../utils/spriteUtils';
 })
 export class HuntEditComponent implements OnInit {
 
-	@Input()
-	displayStatOptions = false;
+	@Input() displayStatOptions = false;
+
 	selectedPokemon: PokemonInterface;
 	searchingPokemon: boolean;
-	form: FormGroup;
+
+	pokemonNameFilter: string;
 	filteredOptions: Observable<NamedResource[]>;
 	pokemonResourceList: NamedResourceList = null;
-	@Input()
-	private hunt: Hunt;
+	form: FormGroup;
+	@Input() private hunt: Hunt;
 
 	constructor(private formBuilder: FormBuilder, private pokeApiService: PokeApiService) {
 	}
@@ -41,6 +43,10 @@ export class HuntEditComponent implements OnInit {
 
 	public get isPokemonCorrectlySelected(): boolean {
 		return this.selectedPokemon != null || !this.form.get('pokemon').touched || this.searchingPokemon;
+	}
+
+	public get isPokemonListComplete(): boolean {
+		return !this.pokemonResourceList.next;
 	}
 
 	ngOnInit(): void {
@@ -69,7 +75,6 @@ export class HuntEditComponent implements OnInit {
 		}
 		this.searchingPokemon = true;
 
-		// TODO cache value
 		// Save Pokémon if there is one
 		this.pokeApiService.getPokemonByUri(pokemonResource.url).then(pokemon => {
 			this.selectedPokemon = pokemon;
@@ -79,6 +84,12 @@ export class HuntEditComponent implements OnInit {
 
 	public displayFn(user: NamedResource): string {
 		return user && user.name ? user.name : '';
+	}
+
+	public scroll(): void {
+		this.pokeApiService.findPokemonList(true).toPromise().then(resourceList => {
+			this.pokemonResourceList = resourceList;
+		});
 	}
 
 	private initForm(): void {
@@ -97,54 +108,42 @@ export class HuntEditComponent implements OnInit {
 
 	private setUpPokemonField(): void {
 		this.searchingPokemon = false;
-		// TODO Optimize fetching and load more if needed
-		this.fetchNextOptions().then(() => {
-			this.filteredOptions = this.form.get('pokemon').valueChanges.pipe(
-				startWith(''),
-				map(value => {
-					// When field is empty
-					if (!value) {
-						this.updatePokemonResource(null);
-						return this.pokemonOptions;
-					}
-
-					// When text is entered
-					if (typeof value === 'string') {
-						this.updatePokemonResource(null);
-						return this.filter(value);
-					}
-
+		this.pokeApiService.findPokemonList().toPromise().then(resourceList => {
+			this.pokemonResourceList = resourceList;
+			this.updateFilteredList();
+			this.form.get('pokemon').valueChanges.subscribe(value => {
+				// When text or nothing is entered
+				if (!value || typeof value === 'string') {
+					this.updatePokemonResource(null);
+					this.pokemonNameFilter = value;
+				} else {
 					// When value is selected
 					this.updatePokemonResource(value);
-					return this.filter(value.name);
-				}),
-			);
+					this.pokemonNameFilter = value.name;
+				}
+
+				this.updateFilteredList();
+			});
 		});
 	}
 
-	private fetchNextOptions(): Promise<void> {
-		return new Promise<void>(resolve => {
-			if (!this.pokemonResourceList) {
-				// Fetch first results
-				this.pokeApiService.findPokemon().then(resourceList => {
-					this.pokemonResourceList = resourceList;
-					resolve();
-				});
-			} else if (!this.pokemonResourceList.next) {
-				// No more results
-				resolve();
-			} else {
-				// Push new results
-				this.pokeApiService.findResourceListByUri(this.pokemonResourceList.next).then(resourceList => {
-					this.pokemonResourceList.results.push(...resourceList.results);
-					resolve();
-				});
+	private updateFilteredList(loadMore: boolean = false): void {
+		this.filteredOptions = this.pokeApiService.findPokemonList(loadMore).pipe(map(pokemonList => {
+			this.pokemonResourceList = pokemonList;
+			if (StringUtils.isEmpty(this.pokemonNameFilter)) {
+				return this.pokemonOptions;
 			}
-		});
-	}
 
-	private filter(value: string): NamedResource[] {
-		const filterValue = value.toLowerCase();
-		return this.pokemonOptions.filter(option => option.name.includes(filterValue));
+			// Filter list
+			const search = this.pokemonNameFilter.toLowerCase();
+			const filteredList = this.pokemonOptions.filter(option => option.name.includes(search));
+
+			// load more
+			if (filteredList.length === 0 && !this.isPokemonListComplete) {
+				this.updateFilteredList(true);
+			}
+
+			return filteredList;
+		}));
 	}
 }

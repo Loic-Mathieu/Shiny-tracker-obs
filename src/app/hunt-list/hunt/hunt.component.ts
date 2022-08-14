@@ -42,6 +42,8 @@ export class HuntComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        // Load first data
+        this.pokeApiService.findPokemonList();
     }
 
     public updateHunt(): void {
