@@ -24,7 +24,8 @@
 									<input [matAutocomplete]="auto" formControlName="pokemon" matInput
 									       placeholder="Pokemon">
 								</mat-form-field>
-								<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+								<mat-autocomplete #auto="matAutocomplete" (scrolled)="scroll()"
+								                  [displayWith]="displayFn" infinite-scroll>
 									<ng-container>
 										<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
 											{{option.name}}
