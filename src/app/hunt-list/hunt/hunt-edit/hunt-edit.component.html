@@ -42,7 +42,8 @@
 								<img [alt]="selectedPokemon ? selectedPokemon.name : ''" [src]=displaySprite
 								     mat-card-image>
 								<ng-container>
-									<mat-spinner diameter="150"></mat-spinner>
+									<mat-spinner *ngIf="searchingPokemon" class="sprite-spinner"
+									             diameter="140"></mat-spinner>
 								</ng-container>
 							</mat-card>
 						</div>

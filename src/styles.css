@@ -11,6 +11,7 @@ body {
 }
 
 .action-row {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -30,7 +31,22 @@ body {
     right: 5px;
 }
 
-.centered-image {
+.centered {
     display: block;
     margin: auto;
+}
+
+.pokemon-sprite {
+    width: 200px;
+    height: 200px;
+}
+
+.pokemon-sprite img {
+    width: 200px;
+}
+
+.pokemon-sprite .sprite-spinner {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

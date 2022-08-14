@@ -5,11 +5,10 @@
 			<div class="container-fluid">
 				<div class="row mat-figure">
 					<!-- Sprite -->
-					<div class="col">
-						<div class="justify-content-center">
-							<img [alt]="hunt.pokemonName" [src]="hunt.pokemonSprite" class="centered-image"
-							     width="200px">
-						</div>
+					<div class="col-4">
+						<mat-card class="pokemon-sprite centered">
+							<img [alt]="hunt.pokemonName" [src]="hunt.pokemonSprite" mat-card-image>
+						</mat-card>
 					</div>
 					<!-- Counter -->
 					<div class="col">
@@ -62,7 +61,7 @@
 		<!-- Encounters actions -->
 		<mat-grid-tile [colspan]="2" [rowspan]="1" id="hunt-encounter-actions-tile">
 			<div class="container-fluid">
-				<mat-button-toggle-group style="width: 100%;">
+				<mat-button-toggle-group class="actions">
 					<mat-button-toggle (click)="decreaseEncounterNumber()" class="action">
 						<fa-icon [icon]="['fas', 'minus']"></fa-icon>
 					</mat-button-toggle>

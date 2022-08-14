@@ -66,6 +66,16 @@
     }
 }
 
-#hunt-encounter-actions-tile .action {
+#hunt-encounter-actions-tile .actions {
+    width: 100%;
+}
+
+#hunt-encounter-actions-tile .actions .action {
     width: 355px;
+    display: flex;
+    align-items: center;
+}
+
+#hunt-encounter-actions-tile .actions button {
+    height: 80px;
 }
