@@ -53,7 +53,8 @@ function createWindow () {
 		width: preferencesStore.get('width'),
 		minWidth: 1000,
 		height: preferencesStore.get('height'),
-		webPreferences: { nodeIntegration: true },
+		// TODO check if websecurity is relevant
+		webPreferences: {webSecurity: false, nodeIntegration: true},
 		title: 'Shiny tracker tool',
 		icon: path.join(__dirname, `/dist/icon/icon.ico`)
 	});
