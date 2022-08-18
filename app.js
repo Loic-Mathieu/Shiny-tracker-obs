@@ -2,11 +2,12 @@ const {app, BrowserWindow, ipcMain} = require('electron');
 const url = require("url");
 const path = require("path");
 const fs = require('fs');
-const settings = require('./electron/settings');
+const settings = require('./electron/settings'); // TODO investigate on build crash
 
 /*	=====	WINDOW	=====	*/
 let mainWindow
-function createWindow () {
+
+function createWindow() {
 	const bounds = settings.getBounds();
 	mainWindow = new BrowserWindow({
 		width: bounds[0],

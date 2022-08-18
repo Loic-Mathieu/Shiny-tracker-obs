@@ -81,8 +81,9 @@
     "files": [
       "dist/**/*",
       "node_modules/**/*",
+      "electron/**/*",
       "package.json",
-      "main.js"
+      "app.js"
     ]
   }
 }
