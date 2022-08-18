@@ -47,6 +47,8 @@ export class HuntOptionsComponent implements OnInit {
 
 	public eraseAction(): void {
 		// TODO display confirmation window
+		// TODO update form control too
+		this.hunt.encounterNumber = 0;
 		this.editEvent.emit(this.hunt);
 	}
 

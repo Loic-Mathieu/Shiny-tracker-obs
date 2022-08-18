@@ -26,15 +26,17 @@ function createWindow() {
 			slashes: true
 		})
 	);
+
+	// TODO limit this to dev mode
 	// Open the DevTools.
-	// mainWindow.webContents.openDevTools()
+	mainWindow.webContents.openDevTools()
 
 	mainWindow.on('closed', function () {
 		mainWindow = null
 	})
 
 	mainWindow.on('resize', () => {
-		let { width, height } = mainWindow.getBounds();
+		let {width, height} = mainWindow.getBounds();
 		settings.setBounds([width, height]);
 	});
 }

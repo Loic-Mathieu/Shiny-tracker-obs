@@ -55,6 +55,10 @@ export interface Sprite {
 	 */
 	front_shiny: string;
 	/**
+	 * Default female shiny sprite
+	 */
+	front_shiny_female: string | null;
+	/**
 	 * Other shiny sprites
 	 */
 	other: {

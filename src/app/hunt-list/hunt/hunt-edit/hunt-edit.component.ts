@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import {Hunt} from '../../../models/hunt';
 import SpriteUtils from '../../../utils/spriteUtils';
 import StringUtils from '../../../utils/stringUtils';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 
 @Component({
 	selector: 'app-hunt-edit',
@@ -15,8 +16,6 @@ import StringUtils from '../../../utils/stringUtils';
 })
 export class HuntEditComponent implements OnInit {
 
-	@Input() displayStatOptions = false;
-
 	selectedPokemon: PokemonInterface;
 	searchingPokemon: boolean;
 
@@ -24,6 +23,7 @@ export class HuntEditComponent implements OnInit {
 	filteredOptions: Observable<NamedResource[]>;
 	pokemonResourceList: NamedResourceList = null;
 	form: FormGroup;
+	useFemaleSprite = false;
 	@Input() private hunt: Hunt;
 
 	constructor(private formBuilder: FormBuilder, private pokeApiService: PokeApiService) {
@@ -37,12 +37,16 @@ export class HuntEditComponent implements OnInit {
 		return this.form.valid && !this.isLoading;
 	}
 
+	public get hasFemaleSprite(): boolean {
+		return SpriteUtils.hasFemaleSprite(this.selectedPokemon);
+	}
+
 	public get pokemonOptions(): NamedResource[] {
 		return this.pokemonResourceList.results;
 	}
 
 	public get displaySprite(): string {
-		return SpriteUtils.getSprite(this.selectedPokemon);
+		return SpriteUtils.getSprite(this.selectedPokemon, this.useFemaleSprite);
 	}
 
 	public get isPokemonCorrectlySelected(): boolean {
@@ -69,7 +73,7 @@ export class HuntEditComponent implements OnInit {
 			// TODO add options for sprites and integrate selectedPokemon in class
 			hunt.pokemonName = this.selectedPokemon.name;
 			hunt.pokemonId = this.selectedPokemon.id;
-			hunt.pokemonSprite = SpriteUtils.getSprite(this.selectedPokemon);
+			hunt.pokemonSprite = this.displaySprite;
 		}
 
 		if (this.hunt != null) {
@@ -92,6 +96,10 @@ export class HuntEditComponent implements OnInit {
 			this.selectedPokemon = pokemon;
 			this.searchingPokemon = false;
 		});
+	}
+
+	public onFemaleSpriteUpdate(changeEvent: MatSlideToggleChange): void {
+		this.useFemaleSprite = changeEvent.checked;
 	}
 
 	public displayFn(user: NamedResource): string {

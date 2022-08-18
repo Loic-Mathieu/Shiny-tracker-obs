@@ -27,6 +27,7 @@ export class HuntComponent implements OnInit {
     @Output()
     deleteEvent: EventEmitter<Hunt> = new EventEmitter<Hunt>();
 
+    // TODO either put this in utils or check material alternative
     static copyToClipBoard(message: string): void {
         const selBox = document.createElement('textarea');
         selBox.style.position = 'fixed';
@@ -42,6 +43,7 @@ export class HuntComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        // TODO use a directive to display start date
         // Load first data
         this.pokeApiService.findPokemonList();
     }
@@ -53,7 +55,7 @@ export class HuntComponent implements OnInit {
             this.huntService.save(this.hunt)
         ])
             .then(result => console.log('OK'))
-            .catch(error => console.error('BAAAD', error));
+            .catch(error => console.error('BAAAD', error)); // TODO handle this properly
     }
 
     public onDelete(): void {

@@ -9,11 +9,11 @@
 				<span>Edit </span>
 				<fa-icon [icon]="['fas', 'pencil']"></fa-icon>
 			</button>
-			<button (click)="eraseAction()" [disabled]="!canUpdate" color="primary" mat-raised-button>
+			<button (click)="eraseAction()" [disabled]="!canUpdate" color="warn" mat-raised-button>
 				<span>Reset </span>
 				<fa-icon [icon]="['fas', 'eraser']"></fa-icon>
 			</button>
-			<button (click)="deleteAction()" [disabled]="!canInteract" color="primary" mat-raised-button>
+			<button (click)="deleteAction()" [disabled]="!canInteract" color="warn" mat-raised-button>
 				<span>Delete </span>
 				<fa-icon [icon]="['fas', 'trash']"></fa-icon>
 			</button>

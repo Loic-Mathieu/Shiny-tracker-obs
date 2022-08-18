@@ -30,6 +30,7 @@ import {HuntEditComponent} from './hunt-list/hunt/hunt-edit/hunt-edit.component'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
 	declarations: [
@@ -64,7 +65,8 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
 		MatCardModule,
 		MatListModule,
 		MatProgressSpinnerModule,
-		MatProgressBarModule
+		MatProgressBarModule,
+		MatSlideToggleModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

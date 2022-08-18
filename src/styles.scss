@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~@angular/material/_theming.scss';
 
 html, body {
     height: 100%;
@@ -50,3 +51,29 @@ body {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+// TODO move this in theme style
+$app-primary: mat-palette($mat-indigo);
+$app-accent: mat-palette($mat-pink, A200, A100, A400);
+
+$app-theme: mat-light-theme($app-primary, $app-accent);
+
+@mixin mix-app-theme($app-theme) {
+    $primary: map-get($app-theme, primary);
+    $accent: map-get($app-theme, accent);
+
+    .mat-button-toggle {
+        background-color: mat-color($primary);
+        color: mat-color($primary, default-contrast);
+    }
+
+    .mat-button-toggle-disabled {
+        background-color: rgba(0, 0, 0, .12);
+        color: rgba(0, 0, 0, .26);
+    }
+    .mat-button-toggle-checked {
+        background-color: mat-color($accent);
+        color: mat-color($accent, default-contrast);
+    }
+}
+
