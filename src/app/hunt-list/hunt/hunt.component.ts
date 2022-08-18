@@ -59,4 +59,16 @@ export class HuntComponent implements OnInit {
     public onDelete(): void {
         this.deleteEvent.emit(this.hunt);
     }
+
+    public onEdit(hunt: Hunt): void {
+        this.huntService.save(hunt).then(updatedHunt => {
+            if (!updatedHunt) {
+                // TODO display error message
+                return;
+            }
+
+            this.hunt = updatedHunt;
+            this.updateHunt();
+        });
+    }
 }

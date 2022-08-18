@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Hunt} from '../../models/hunt';
-import {HuntEditComponent} from '../hunt/hunt-edit/hunt-edit.component';
+import {Hunt} from '../../../models/hunt';
+import {HuntEditComponent} from '../hunt-edit/hunt-edit.component';
 
 @Component({
     selector: 'app-hunt-create',
@@ -10,15 +10,15 @@ import {HuntEditComponent} from '../hunt/hunt-edit/hunt-edit.component';
 })
 export class HuntCreateComponent implements OnInit {
 
-    @ViewChild('editForm') private huntEditComponent: HuntEditComponent;
+    @ViewChild('editForm')
+    private huntEditComponent: HuntEditComponent;
 
-    // TODO dialog ref is deprecated
     constructor(private dialogRef: MatDialogRef<HuntCreateComponent>,
                 @Inject(MAT_DIALOG_DATA) private data) {
     }
 
     public get canBeSaved(): boolean {
-        return !!this.huntEditComponent && this.huntEditComponent.valid;
+        return this.huntEditComponent != null && this.huntEditComponent.valid;
     }
 
     public get hunt(): Hunt | null {

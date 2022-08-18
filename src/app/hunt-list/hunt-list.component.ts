@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Hunt} from '../models/hunt';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {HuntCreateComponent} from './hunt-create/hunt-create.component';
+import {HuntCreateComponent} from './hunt/hunt-create/hunt-create.component';
 import {HuntListService} from './hunt-list.service';
 
 @Component({

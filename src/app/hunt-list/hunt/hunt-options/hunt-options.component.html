@@ -1,15 +1,19 @@
 <div>
-	<app-hunt-edit [hunt]="hunt"></app-hunt-edit>
+	<app-hunt-edit #editForm [hunt]="hunt"></app-hunt-edit>
 </div>
 
 <mat-action-row>
 	<div class="hunt-tools">
 		<div class="hunt-actions">
-			<button (click)="editAction()" color="primary" mat-raised-button>
+			<button (click)="editAction()" [disabled]="!canUpdate" color="primary" mat-raised-button>
+				<span>Edit </span>
+				<fa-icon [icon]="['fas', 'pencil']"></fa-icon>
+			</button>
+			<button (click)="eraseAction()" [disabled]="!canUpdate" color="primary" mat-raised-button>
 				<span>Reset </span>
 				<fa-icon [icon]="['fas', 'eraser']"></fa-icon>
 			</button>
-			<button (click)="deleteAction()" color="primary" mat-raised-button>
+			<button (click)="deleteAction()" [disabled]="!canInteract" color="primary" mat-raised-button>
 				<span>Delete </span>
 				<fa-icon [icon]="['fas', 'trash']"></fa-icon>
 			</button>

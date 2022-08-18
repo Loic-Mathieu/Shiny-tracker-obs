@@ -29,8 +29,12 @@ export class HuntEditComponent implements OnInit {
 	constructor(private formBuilder: FormBuilder, private pokeApiService: PokeApiService) {
 	}
 
+	public get isLoading(): boolean {
+		return this.searchingPokemon;
+	}
+
 	public get valid(): boolean {
-		return this.form.valid && !this.searchingPokemon;
+		return this.form.valid && !this.isLoading;
 	}
 
 	public get pokemonOptions(): NamedResource[] {
@@ -61,11 +65,16 @@ export class HuntEditComponent implements OnInit {
 			? this.form.get('encounters').value : 0;
 		hunt.odds = this.form.get('odds').value;
 
-		if (this.selectedPokemon) {
+		if (this.selectedPokemon != null) {
 			// TODO add options for sprites and integrate selectedPokemon in class
 			hunt.pokemonName = this.selectedPokemon.name;
 			hunt.pokemonId = this.selectedPokemon.id;
 			hunt.pokemonSprite = SpriteUtils.getSprite(this.selectedPokemon);
+		}
+
+		if (this.hunt != null) {
+			// save instead of create
+			hunt.id = this.hunt.id;
 		}
 
 		return hunt;
@@ -94,16 +103,20 @@ export class HuntEditComponent implements OnInit {
 	}
 
 	private initForm(): void {
-		if (this.hunt) {
-
+		const isHuntLoaded = this.hunt != null;
+		if (isHuntLoaded) {
+			this.searchingPokemon = true;
+			this.pokeApiService.getPokemonById(this.hunt.pokemonId).then(pokemon => {
+				this.selectedPokemon = pokemon;
+				this.searchingPokemon = false;
+			});
 		}
 
 		this.form = this.formBuilder.group({
-			name: ['', Validators.required],
-			pokemon: [''],
-			generation: [''],
-			encounters: [null, Validators.required],
-			odds: [null, Validators.required],
+			name: [isHuntLoaded ? this.hunt.name : null, Validators.required],
+			encounters: [isHuntLoaded ? this.hunt.encounterNumber : null, Validators.required],
+			odds: [isHuntLoaded ? this.hunt.odds : null, Validators.required],
+			pokemon: [isHuntLoaded ? this.hunt.pokemonName : null],
 		});
 	}
 
@@ -139,6 +152,7 @@ export class HuntEditComponent implements OnInit {
 			const search = this.pokemonNameFilter.toLowerCase();
 			const filteredList = this.pokemonOptions.filter(option => option.name.includes(search));
 
+			// TODO fix the return to start bug
 			// load more
 			if (filteredList.length === 0 && !this.isPokemonListComplete) {
 				this.updateFilteredList(true);

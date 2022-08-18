@@ -6,7 +6,7 @@ import {HuntListComponent} from './hunt-list/hunt-list.component';
 import {HuntComponent} from './hunt-list/hunt/hunt.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgxElectronModule} from 'ngx-electron';
-import {HuntCreateComponent} from './hunt-list/hunt-create/hunt-create.component';
+import {HuntCreateComponent} from './hunt-list/hunt/hunt-create/hunt-create.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReactiveFormsModule} from '@angular/forms';
