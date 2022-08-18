@@ -2,57 +2,16 @@ const {app, BrowserWindow, ipcMain} = require('electron');
 const url = require("url");
 const path = require("path");
 const fs = require('fs');
-
-/*	=====	STORE	=====	*/
-class Store {
-	constructor(opts) {
-		const userDataPath = app.getPath('userData');
-		this.path = path.join(userDataPath, opts.configName + '.json');
-
-		this.data = this.parseDataFile(this.path, opts.data);
-	}
-
-	get(key) {
-		return this.data[key];
-	}
-
-	set(key, val) {
-		this.data[key] = val;
-		fs.writeFileSync(this.path, JSON.stringify(this.data));
-	}
-
-	parseDataFile(filePath, data) {
-		try {
-			return JSON.parse(fs.readFileSync(filePath));
-		} catch(error) {
-			return data;
-		}
-	}
-}
-
-const saveStore = new Store({
-	configName: 'hunt-saves',
-	data: {
-		path: path.join(app.getPath('userData'), 'save')
-	}
-});
-
-const preferencesStore = new Store({
-	configName: 'preferences',
-	data: {
-		width: 1000,
-		height: 600,
-	}
-});
-
+const settings = require('./electron/settings');
 
 /*	=====	WINDOW	=====	*/
 let mainWindow
 function createWindow () {
+	const bounds = settings.getBounds();
 	mainWindow = new BrowserWindow({
-		width: preferencesStore.get('width'),
+		width: bounds[0],
 		minWidth: 1000,
-		height: preferencesStore.get('height'),
+		height: bounds[1],
 		// TODO check if websecurity is relevant
 		webPreferences: {webSecurity: false, nodeIntegration: true},
 		title: 'Shiny tracker tool',
@@ -75,8 +34,7 @@ function createWindow () {
 
 	mainWindow.on('resize', () => {
 		let { width, height } = mainWindow.getBounds();
-		preferencesStore.set('width', width);
-		preferencesStore.set('height', height);
+		settings.setBounds([width, height]);
 	});
 }
 
@@ -101,25 +59,47 @@ app.on('activate', function () {
 })
 
 
-
 /*	=====	API	=====	*/
 ipcMain.on('WRITE_FILE_TEXT', (event, arg) => {
-	if (!fs.existsSync(saveStore.get('path'))) {
-		fs.mkdirSync(saveStore.get('path'));
+	// TODO move this in electron/fileService or something
+	if (!fs.existsSync(settings.getSavePath())) {
+		fs.mkdirSync(settings.getSavePath());
 	}
 
-	let folderPath = saveStore.get('path') + '\\' + arg.hunt;
+	const folderPath = settings.getSavePath() + '\\' + arg.hunt;
 	if (!fs.existsSync(folderPath)) {
 		fs.mkdirSync(folderPath);
 	}
 
-	let fullPath = folderPath + '\\' + arg.fileName;
+	const fullPath = folderPath + '\\' + arg.fileName;
 	console.log(fullPath);
 	fs.writeFile(fullPath, arg.content, err => {
-		console.log(err);
+		// TODO maybe log error files
+		console.error(err);
 	});
-})
+	event.returnValue = true;
+});
+
+ipcMain.on('DELETE_FILE_TEXT', (event, arg) => {
+	// TODO move this in electron/fileService or something
+	if (!arg.hunt) {
+		event.returnValue = false;
+	}
+
+	// TODO to be tested
+	const folderPath = settings.getSavePath() + '\\' + arg.hunt;
+	fs.rmdirSync(folderPath, {recursive: true});
+});
 
 ipcMain.on('GET_SAVE_PATH', (event) => {
-	event.returnValue = saveStore.get('path');
-})
+	event.returnValue = settings.getSavePath();
+});
+
+ipcMain.on('POST_SAVE_PATH', (event, arg) => {
+	if (!arg.path) {
+		event.returnValue = false;
+	}
+
+	settings.setSavePath(arg.path);
+	event.returnValue = true;
+});

@@ -29,6 +29,7 @@ export class HuntListComponent implements OnInit {
         const dialogRef = this.dialog.open(HuntCreateComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
             if (!result) {
+                // TODO print warning message
                 return;
             }
 
@@ -43,6 +44,12 @@ export class HuntListComponent implements OnInit {
     }
 
     public removeHunt(hunt: Hunt): void {
+        if (!hunt) {
+            // TODO print warning message
+            return;
+        }
+
+        console.log(hunt);
         this.huntService.deleteHunt(hunt).then(response => {
             if (response) {
                 this.initHunts();

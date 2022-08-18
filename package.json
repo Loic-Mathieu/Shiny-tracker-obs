@@ -2,7 +2,7 @@
   "name": "shiny-tracker-tool",
   "productName": "Shiny tracker tool",
   "version": "0.0.1",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
     "build": "npm run postinstall:electron && npm run electron:tsc && ng build",
     "build:dev": "npm run build -- -c dev",
@@ -63,6 +63,7 @@
     "codelyzer": "^6.0.0",
     "electron": "^11.0.2",
     "electron-builder": "^23.3.3",
+    "electron-store": "^8.1.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.4.0",

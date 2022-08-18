@@ -62,7 +62,10 @@ export class HuntEditComponent implements OnInit {
 		hunt.odds = this.form.get('odds').value;
 
 		if (this.selectedPokemon) {
-			// TODO update sprite data
+			// TODO add options for sprites and integrate selectedPokemon in class
+			hunt.pokemonName = this.selectedPokemon.name;
+			hunt.pokemonId = this.selectedPokemon.id;
+			hunt.pokemonSprite = SpriteUtils.getSprite(this.selectedPokemon);
 		}
 
 		return hunt;

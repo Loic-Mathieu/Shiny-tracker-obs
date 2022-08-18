@@ -1,16 +1,16 @@
 <div>
-	<app-hunt-edit></app-hunt-edit>
+	<app-hunt-edit [hunt]="hunt"></app-hunt-edit>
 </div>
 
 <mat-action-row>
 	<div class="hunt-tools">
 		<div class="hunt-actions">
-			<button color="primary" mat-raised-button>
-				<span>Reset</span>
+			<button (click)="editAction()" color="primary" mat-raised-button>
+				<span>Reset </span>
 				<fa-icon [icon]="['fas', 'eraser']"></fa-icon>
 			</button>
-			<button color="primary" mat-raised-button>
-				<span>Delete</span>
+			<button (click)="deleteAction()" color="primary" mat-raised-button>
+				<span>Delete </span>
 				<fa-icon [icon]="['fas', 'trash']"></fa-icon>
 			</button>
 		</div>

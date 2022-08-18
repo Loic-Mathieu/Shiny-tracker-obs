@@ -16,7 +16,7 @@
 			<app-hunt-infos (editEvent)="updateHunt()" [hunt]="hunt"></app-hunt-infos>
 		</mat-tab>
 		<mat-tab label="Options">
-			<app-hunt-options></app-hunt-options>
+			<app-hunt-options (deleteEvent)="onDelete()" (editEvent)="updateHunt()"></app-hunt-options>
 		</mat-tab>
 	</mat-tab-group>
 </mat-expansion-panel>
