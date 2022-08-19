@@ -10,11 +10,9 @@ export class FileService {
     constructor(private electronServiceInstance: ElectronService) {
     }
 
-    getSavePath(huntName: string, fileType: FileType): Promise<string> {
-        return new Promise<string>(resolve => {
-            const path = this.electronServiceInstance.ipcRenderer.sendSync('GET_SAVE_PATH');
-            resolve(`${path}\\${huntName}\\${fileType}`);
-        });
+    getSavePath(huntName: string, fileType: FileType): string {
+        const path = this.electronServiceInstance.ipcRenderer.sendSync('GET_SAVE_PATH');
+        return `${path}\\${huntName}\\${fileType}`;
     }
 
     read(huntName: string, fileType: FileType): Promise<string> {

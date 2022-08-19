@@ -31,6 +31,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
 	declarations: [
@@ -67,6 +68,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 		MatProgressSpinnerModule,
 		MatProgressBarModule,
 		MatSlideToggleModule,
+		ClipboardModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

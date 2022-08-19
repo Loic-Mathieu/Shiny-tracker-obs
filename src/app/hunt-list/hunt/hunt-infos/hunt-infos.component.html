@@ -6,15 +6,17 @@
 				<div class="row mat-figure">
 					<!-- Sprite -->
 					<div class="col-5">
-						<mat-card class="pokemon-sprite centered">
+						<mat-card [cdkCopyToClipboard]="copyToClipboard(hunt.pokemonSprite)"
+						          class="pokemon-sprite centered">
 							<img [alt]="hunt.pokemonName" [src]="hunt.pokemonSprite" mat-card-image>
 						</mat-card>
 					</div>
 					<!-- Counter -->
 					<div class="col">
-						<div class="input-group input-group-lg justify-content-center">
+						<div [cdkCopyToClipboard]="copyToClipboard(getEncounterPath)"
+						     class="input-group input-group-lg justify-content-center">
 							<div class="input-group-prepend" title="Click to copy file path">
-								<label (click)="getEncounterPath()" class="input-group-text action-container">
+								<label class="input-group-text action-container">
 									<span>Encounters</span>
 									<fa-icon [icon]="['fas', 'folder']"
 									         class="action-icon folder-icon fa-xs"></fa-icon>
@@ -33,10 +35,9 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
-						<div class="input-group output">
+						<div [cdkCopyToClipboard]="copyToClipboard(getChancesPath)" class="input-group output">
 							<div class="input-group-prepend" title="Click to copy file path">
-								<label (click)="getChancesPath()"
-								       class="input-group-text shiny-hunt-label action-container">
+								<label class="input-group-text shiny-hunt-label action-container">
 									<span>Chances</span>
 									<fa-icon [icon]="['fas', 'folder']" class="action-icon folder-icon fa-xs"></fa-icon>
 								</label>
