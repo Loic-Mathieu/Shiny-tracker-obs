@@ -36,21 +36,22 @@
     margin-bottom: 8px;
 }
 
-.action-container {
+/*  == Output copy actions ==  */
+.copiable-output .copiable-output-label {
     position: relative;
 }
 
-.action-container .folder-icon {
+.copiable-output .copiable-output-label .interactive-icon {
     position: absolute;
     top: 3px;
     right: 3px;
 }
 
-.action-container .folder-icon {
-    opacity: 0;
+.copiable-output .copiable-output-label .interactive-icon {
+    opacity: 5%;
 }
 
-.action-container:hover .folder-icon {
+.copiable-output:hover .copiable-output-label .interactive-icon {
     animation-name: hover-icon;
     animation-duration: 1s;
     animation-direction: normal;
@@ -59,13 +60,14 @@
 
 @keyframes hover-icon {
     0% {
-        opacity: 0;
+        opacity: 5%;
     }
     100% {
         opacity: 1;
     }
 }
 
+/*  == Counter actions ==  */
 #hunt-encounter-actions-tile .actions {
     width: 100%;
     display: flex;
