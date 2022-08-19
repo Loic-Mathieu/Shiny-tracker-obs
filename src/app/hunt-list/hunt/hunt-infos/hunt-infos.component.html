@@ -61,14 +61,14 @@
 		<!-- Encounters actions -->
 		<mat-grid-tile [colspan]="2" [rowspan]="1" id="hunt-encounter-actions-tile">
 			<div class="container-fluid">
-				<mat-button-toggle-group class="actions">
-					<mat-button-toggle (click)="decreaseEncounterNumber()" class="action">
-						<fa-icon [icon]="['fas', 'minus']"></fa-icon>
-					</mat-button-toggle>
-					<mat-button-toggle (click)="increaseEncounterNumber()" class="action">
-						<fa-icon [icon]="['fas', 'plus']"></fa-icon>
-					</mat-button-toggle>
-				</mat-button-toggle-group>
+				<div class="actions">
+					<button (click)="decreaseEncounterNumber()" class="action" color="accent" mat-raised-button>
+						<fa-icon [icon]="['fas', 'minus']" size="lg"></fa-icon>
+					</button>
+					<button (click)="increaseEncounterNumber()" class="action" color="accent" mat-raised-button>
+						<fa-icon [icon]="['fas', 'plus']" size="lg"></fa-icon>
+					</button>
+				</div>
 			</div>
 		</mat-grid-tile>
 	</mat-grid-list>

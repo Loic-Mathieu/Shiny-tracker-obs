@@ -23,23 +23,29 @@ body {
 }
 
 .header {
-    position: relative;
+  position: relative;
 }
 
 .header .header-actions {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header .header-actions .action:not(:first-child) {
+  margin-left: 10px;
 }
 
 .centered {
-    display: block;
-    margin: auto;
+  display: block;
+  margin: auto;
 }
 
 .pokemon-sprite {
-    width: 200px;
-    height: 200px;
+  width: 200px;
+  height: 200px;
 }
 
 .pokemon-sprite img {

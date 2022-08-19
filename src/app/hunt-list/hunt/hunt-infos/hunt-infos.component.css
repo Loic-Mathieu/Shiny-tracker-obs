@@ -68,14 +68,13 @@
 
 #hunt-encounter-actions-tile .actions {
     width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 #hunt-encounter-actions-tile .actions .action {
-    width: 355px;
-    display: flex;
+    width: 45%;
+    height: 50px;
+    display: inline-block;
     align-items: center;
-}
-
-#hunt-encounter-actions-tile .actions button {
-    height: 80px;
 }

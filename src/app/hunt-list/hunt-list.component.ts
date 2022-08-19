@@ -1,24 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Hunt} from '../models/hunt';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {HuntCreateComponent} from './hunt/hunt-create/hunt-create.component';
 import {HuntListService} from './hunt-list.service';
+import {MatAccordion} from '@angular/material/expansion';
 
 @Component({
-    selector: 'app-hunt-list',
-    templateUrl: './hunt-list.component.html',
-    styleUrls: ['./hunt-list.component.css']
+	selector: 'app-hunt-list',
+	templateUrl: './hunt-list.component.html',
+	styleUrls: ['./hunt-list.component.css']
 })
 export class HuntListComponent implements OnInit {
 
-    hunts: Hunt[];
+	@ViewChild(MatAccordion)
+	accordion: MatAccordion;
 
-    constructor(private huntService: HuntListService,
-                private dialog: MatDialog) { }
+	hunts: Hunt[];
 
-    ngOnInit(): void {
-        this.initHunts();
-    }
+	constructor(private huntService: HuntListService,
+	            private dialog: MatDialog) {
+	}
+
+	ngOnInit(): void {
+		this.initHunts();
+	}
 
     public createHunt(): void {
         const dialogConfig = new MatDialogConfig();

@@ -2,15 +2,18 @@
 	<div class="header">
 		<h1>Current hunts</h1>
 		<div class="header-actions">
-			<button (click)="createHunt()" class="btn btn-light" mat-raised-button title="Add new hunt">
+			<button (click)="accordion.closeAll()" class="action" mat-stroked-button title="Collapse all">
+				<span>Collapse all</span>
+			</button>
+			<button (click)="createHunt()" class="action" color="primary" mat-raised-button title="Add new hunt">
 				<span style="padding-right: 3px">Add</span>
 				<fa-icon [icon]="['fas', 'plus']"></fa-icon>
 			</button>
 		</div>
 	</div>
-	<mat-accordion class="headers-align" id="hunt-list" multi>
+	<mat-accordion #huntList multi>
 		<ng-container *ngFor="let hunt of hunts">
 			<app-hunt (deleteEvent)="removeHunt($event)" [hunt]="hunt" [toggled]="false"></app-hunt>
 		</ng-container>
-    </mat-accordion>
+	</mat-accordion>
 </div>
