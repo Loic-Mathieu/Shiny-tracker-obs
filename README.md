@@ -1,27 +1,37 @@
-# Shiny counter for streamers
+# Shiny hunt counter for streamers
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
+This shiny hunt tool can track the encounters of Pokémon to calculate odds of obtaining a shiny.
+The main utility of this software is that it writes the values in files in order to be used with OBS and display the
+hunt statistics on stream.
 
-## Development server
+For more information about shiny Pokémon: https://www.serebii.net/games/shiny.shtml
+___
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+Run `yarn install`
+> The script may be stuck during install-app-deps depending on your node version
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Development build
 
-## Build
+Run `yarn start:electron`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Generate exe
 
-## Running unit tests
+Run `yarn pack`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Generate installer
 
-## Running end-to-end tests
+Run `yarn dist`
+___
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Example
 
-## Further help
+*Coming soon*
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+___
+
+## Credits
+
+This app relies on the PokeAPI service:
+https://pokeapi.co

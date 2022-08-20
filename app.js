@@ -3,6 +3,7 @@ const url = require("url");
 const path = require("path");
 const fs = require('fs');
 const settings = require('./electron/settings'); // TODO investigate on build crash
+const isDev = require('electron-is-dev');
 
 /*	=====	WINDOW	=====	*/
 let mainWindow
@@ -17,28 +18,28 @@ function createWindow() {
 		webPreferences: {webSecurity: false, nodeIntegration: true},
 		title: 'Shiny tracker tool',
 		icon: path.join(__dirname, `/dist/icon/icon.ico`)
-	});
+    });
 
-	mainWindow.loadURL(
-		url.format({
-			pathname: path.join(__dirname, `/dist/index.html`),
-			protocol: "file:",
-			slashes: true
-		})
-	);
+    mainWindow.loadURL(
+        url.format({
+            pathname: path.join(__dirname, `/dist/index.html`),
+            protocol: "file:",
+            slashes: true
+        })
+    );
 
-	// TODO limit this to dev mode
-	// Open the DevTools.
-	mainWindow.webContents.openDevTools()
+    if (isDev) {
+        mainWindow.webContents.openDevTools()
+    }
 
-	mainWindow.on('closed', function () {
-		mainWindow = null
-	})
+    mainWindow.on('closed', function () {
+        mainWindow = null
+    })
 
-	mainWindow.on('resize', () => {
-		let {width, height} = mainWindow.getBounds();
-		settings.setBounds([width, height]);
-	});
+    mainWindow.on('resize', () => {
+        let {width, height} = mainWindow.getBounds();
+        settings.setBounds([width, height]);
+    });
 }
 
 app.on('ready', () => {

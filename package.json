@@ -1,14 +1,15 @@
 {
   "name": "shiny-tracker-tool",
   "productName": "Shiny tracker tool",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "Shiny hunt tool for streamers",
+  "author": "@Loic-Mathieu",
   "main": "app.js",
   "scripts": {
-    "ng": "ng",
-    "start:old": "ng serve",
-    "build:old": "ng build",
+    "postinstall": "npm run postinstall:electron && npx electron-builder install-app-deps",
+    "postinstall:web": "node postinstall-web",
+    "postinstall:electron": "node postinstall",
     "start:electron": "ng build --base-href ./ && electron .",
-    "build:electron": "ng build --prod && electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
@@ -28,8 +29,9 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.0",
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
     "bootstrap": "^4.5.3",
-    "jquery": "3.6.0",
+    "electron-is-dev": "^2.0.0",
     "electron-store": "^8.1.0",
+    "jquery": "3.6.0",
     "ngx-electron": "^2.2.0",
     "popper.js": "1.16.1",
     "rxjs": "~6.6.0",
@@ -61,13 +63,16 @@
     "typescript": "~4.3.5"
   },
   "build": {
-    "appId": "shiny",
+    "appId": "Shiny.Hunting.Tool.Streaming",
     "files": [
       "dist/**/*",
       "node_modules/**/*",
       "electron/**/*",
       "package.json",
       "app.js"
-    ]
+    ],
+    "win": {
+      "icon": "dist/icon/icon.ico"
+    }
   }
 }
