@@ -2,7 +2,8 @@
 	<div class="header">
 		<h1>Current hunts</h1>
 		<div class="header-actions">
-			<button (click)="accordion.closeAll()" class="action" mat-stroked-button title="Collapse all">
+			<button (click)="accordion.closeAll()" [disabled]="!isAtLeastOneHunt" class="action" mat-stroked-button
+			        title="Collapse all">
 				<span>Collapse all</span>
 			</button>
 			<button (click)="createHunt()" class="action" color="primary" mat-raised-button title="Add new hunt">
@@ -11,9 +12,27 @@
 			</button>
 		</div>
 	</div>
-	<mat-accordion #huntList multi>
-		<ng-container *ngFor="let hunt of hunts">
-			<app-hunt (deleteEvent)="removeHunt($event)" [hunt]="hunt" [toggled]="false"></app-hunt>
-		</ng-container>
-	</mat-accordion>
+	<ng-container *ngIf="isAtLeastOneHunt; else elseBlock">
+		<mat-accordion multi>
+			<ng-container *ngFor="let hunt of hunts">
+				<app-hunt (deleteEvent)="removeHunt($event)" [hunt]="hunt" [toggled]="false"></app-hunt>
+			</ng-container>
+		</mat-accordion>
+	</ng-container>
+	<ng-template #elseBlock>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="create-wrapper">
+						<button (click)="createHunt()" color="primary" mat-stroked-button>
+							<span>Create</span>
+						</button>
+						<button (click)="openTutorial()" mat-stroked-button>
+							<span>Tutorial</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ng-template>
 </div>

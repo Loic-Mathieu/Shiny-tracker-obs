@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, shell, ipcMain} = require('electron');
 const url = require("url");
 const path = require("path");
 const fs = require('fs');
@@ -28,6 +28,7 @@ function createWindow() {
         })
     );
 
+	// TODO update action bar accordingly
     if (isDev) {
         mainWindow.webContents.openDevTools()
     }
@@ -106,4 +107,15 @@ ipcMain.on('POST_SAVE_PATH', (event, arg) => {
 
 	settings.setSavePath(arg.path);
 	event.returnValue = true;
+});
+
+// TODO move this in adequate file
+ipcMain.on('OPEN_LINK', (event, arg) => {
+	if (!arg.link) {
+		event.returnValue = false;
+	}
+
+	shell.openExternal(arg.link).then(() => {
+		event.returnValue = true;
+	});
 });
