@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+
+$theme-light: mat-light-theme((
+        color: (
+                primary: mat-palette($mat-indigo),
+                accent: mat-palette($mat-pink, A200, A100, A400),
+        )
+));
+
+$theme-dark: mat-dark-theme((
+        color: (
+                primary: mat-palette($mat-indigo),
+                accent: mat-palette($mat-pink, A200, A100, A400),
+        )
+));

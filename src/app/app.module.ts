@@ -32,6 +32,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import {LabeledOutputComponent} from './labeled-output/labeled-output.component';
 
 @NgModule({
 	declarations: [
@@ -42,7 +43,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 		HuntInfosComponent,
 		HuntOptionsComponent,
 		HuntEditComponent,
-		OptionsScrollDirective
+		OptionsScrollDirective,
+		LabeledOutputComponent
 	],
 	imports: [
 		BrowserModule,
@@ -73,4 +75,5 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 	providers: [],
 	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

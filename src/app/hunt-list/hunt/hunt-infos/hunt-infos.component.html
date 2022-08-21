@@ -17,16 +17,10 @@
 					</div>
 					<!-- Counter -->
 					<div class="col">
-						<div [cdkCopyToClipboard]="copyToClipboard(getEncounterPath)"
-						     class="input-group input-group-lg justify-content-center copiable-output">
-							<div class="input-group-prepend">
-								<label class="input-group-text copiable-output-label">
-									<span>Encounters</span>
-									<fa-icon [icon]="['fas', 'folder']" class="interactive-icon fa-xs"
-									         title="Click to copy file path"></fa-icon>
-								</label>
-							</div>
-							<span class="form-control text-center" id="hunt-encounter">{{hunt.encounterNumber}}</span>
+						<div class="output" id="hunt-encounter-output">
+							<app-labeled-output [copyValue]="getEncounterPath" [label]="'Encounters'"
+							                    [value]="hunt.encounterNumber">
+							</app-labeled-output>
 						</div>
 					</div>
 				</div>
@@ -38,26 +32,18 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col">
-						<div [cdkCopyToClipboard]="copyToClipboard(getChancesPath)"
-						     class="input-group output copiable-output">
-							<div class="input-group-prepend">
-								<label class="input-group-text shiny-hunt-label copiable-output-label">
-									<span>Chances</span>
-									<fa-icon [icon]="['fas', 'folder']" class="interactive-icon fa-xs"
-									         title="Click to copy file path"></fa-icon>
-								</label>
-							</div>
-							<span class="form-control text-center" id="shiny-chances">{{probability}}%</span>
+						<div class="output">
+							<app-labeled-output [copyValue]="getChancesPath" [label]="'Chances'" [secondary]="true"
+							                    [value]="probability" class="output">
+							</app-labeled-output>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<div class="input-group output">
-							<div class="input-group-prepend">
-								<span class="input-group-text shiny-hunt-label">Rate</span>
-							</div>
-							<span class="form-control text-center" id="shiny-rate">1 / {{hunt.odds}}</span>
+						<div class="output">
+							<app-labeled-output [label]="'Rate'" [secondary]="true" [value]="odds" class="output">
+							</app-labeled-output>
 						</div>
 					</div>
 				</div>

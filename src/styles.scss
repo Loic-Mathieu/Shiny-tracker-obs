@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~@angular/material/_theming.scss';
+@import 'styles/themes';
 
 html, body {
     height: 100%;
@@ -23,29 +23,29 @@ body {
 }
 
 .header {
-  position: relative;
+    position: relative;
 }
 
 .header .header-actions {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  display: flex;
-  justify-content: flex-end;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .header .header-actions .action:not(:first-child) {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .centered {
-  display: block;
-  margin: auto;
+    display: block;
+    margin: auto;
 }
 
 .pokemon-sprite {
-  width: 200px;
-  height: 200px;
+    width: 200px;
+    height: 200px;
 }
 
 .pokemon-sprite img {
@@ -57,29 +57,3 @@ body {
     margin-left: 10px;
     margin-right: 10px;
 }
-
-// TODO move this in theme style
-$app-primary: mat-palette($mat-indigo);
-$app-accent: mat-palette($mat-pink, A200, A100, A400);
-
-$app-theme: mat-light-theme($app-primary, $app-accent);
-
-@mixin mix-app-theme($app-theme) {
-    $primary: map-get($app-theme, primary);
-    $accent: map-get($app-theme, accent);
-
-    .mat-button-toggle {
-        background-color: mat-color($primary);
-        color: mat-color($primary, default-contrast);
-    }
-
-    .mat-button-toggle-disabled {
-        background-color: rgba(0, 0, 0, .12);
-        color: rgba(0, 0, 0, .26);
-    }
-    .mat-button-toggle-checked {
-        background-color: mat-color($accent);
-        color: mat-color($accent, default-contrast);
-    }
-}
-

@@ -21,7 +21,13 @@ export class HuntInfosComponent implements OnInit {
 	}
 
 	public get probability(): string {
-		return StatisticUtils.calculateProbability(this.hunt);
+		// TODO use directive
+		return StatisticUtils.calculateProbability(this.hunt) + '%';
+	}
+
+	public get odds(): string {
+		// TODO use directive
+		return '1 / ' + this.hunt.odds;
 	}
 
 	public get getEncounterPath(): string {

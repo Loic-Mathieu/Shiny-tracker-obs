@@ -27,21 +27,6 @@ export class HuntComponent implements OnInit {
     @Output()
     deleteEvent: EventEmitter<Hunt> = new EventEmitter<Hunt>();
 
-    // TODO either put this in utils or check material alternative
-    static copyToClipBoard(message: string): void {
-        const selBox = document.createElement('textarea');
-        selBox.style.position = 'fixed';
-        selBox.style.left = '0';
-        selBox.style.top = '0';
-        selBox.style.opacity = '0';
-        selBox.value = message;
-        document.body.appendChild(selBox);
-        selBox.focus();
-        selBox.select();
-        document.execCommand('copy');
-        document.body.removeChild(selBox);
-    }
-
     ngOnInit(): void {
         // TODO use a directive to display start date
         // Load first data

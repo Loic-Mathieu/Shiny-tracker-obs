@@ -3,37 +3,16 @@
     margin-bottom: 10px;
 }
 
-.shiny-hunt-label {
-    width: 100px;
-    display: inline-block;
-    text-align: center;
+:host ::ng-deep #hunt-encounter-output .labeled-output {
+    height: 80px;
 }
 
-#hunt-title {
-    font-weight: bold;
+:host ::ng-deep #hunt-encounter-output .labeled-output .field {
+    font-size: 1.5rem;
 }
 
-#hunt-encounter {
-    font-weight: bold;
-    font-size: 40px;
-}
-
-#shiny-chances {
-    font-style: italic;
-    font-weight: bold;
-}
-
-#shiny-rate {
-    font-style: italic;
-}
-
-.hunt-stats {
-    border-left: lightgray solid thin;
-    padding: 20px;
-}
-
-.hunt-stats .output {
-    margin-bottom: 8px;
+.hunt-stats:not(:first-child) .output {
+    margin-bottom: 10px;
 }
 
 /*  == Output copy actions ==  */

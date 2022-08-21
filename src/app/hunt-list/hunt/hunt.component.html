@@ -11,12 +11,15 @@
 			</div>
 		</div>
 	</mat-expansion-panel-header>
-	<mat-tab-group>
-		<mat-tab label="Infos">
-			<app-hunt-infos (editEvent)="updateHunt()" [hunt]="hunt"></app-hunt-infos>
-		</mat-tab>
-		<mat-tab label="Options">
-			<app-hunt-options (deleteEvent)="onDelete()" (editEvent)="onEdit($event)" [hunt]="hunt"></app-hunt-options>
-		</mat-tab>
-	</mat-tab-group>
+	<ng-template matExpansionPanelContent>
+		<mat-tab-group>
+			<mat-tab label="Infos">
+				<app-hunt-infos (editEvent)="updateHunt()" [hunt]="hunt"></app-hunt-infos>
+			</mat-tab>
+			<mat-tab label="Options">
+				<app-hunt-options (deleteEvent)="onDelete()" (editEvent)="onEdit($event)"
+				                  [hunt]="hunt"></app-hunt-options>
+			</mat-tab>
+		</mat-tab-group>
+	</ng-template>
 </mat-expansion-panel>

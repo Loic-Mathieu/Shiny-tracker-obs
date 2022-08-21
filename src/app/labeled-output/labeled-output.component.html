@@ -1,0 +1,14 @@
+<div (click)="copy()" [class.copiable-output-label]="isCopiable" class="labeled-output">
+	<div [class.icon-anchor]="isCopiable" class="field">
+		<label class="field-label">
+			<span>{{label}}</span>
+			<ng-container *ngIf="isCopiable">
+				<fa-icon [icon]="['fas', 'folder']" class="interactive-icon fa-xs"
+				         title="Click to copy file path"></fa-icon>
+			</ng-container>
+		</label>
+	</div>
+	<div class="field">
+		<span [class.secondary]="secondary" class="field-value">{{value}}</span>
+	</div>
+</div>
