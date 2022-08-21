@@ -1,5 +1,7 @@
 # Shiny hunt counter for streamers
 
+-BETA-
+
 This shiny hunt tool can track the encounters of Pokémon to calculate odds of obtaining a shiny.
 The main utility of this software is that it writes the values in files in order to be used with OBS and display the
 hunt statistics on stream.
