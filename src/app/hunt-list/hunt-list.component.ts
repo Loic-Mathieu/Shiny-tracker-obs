@@ -18,6 +18,8 @@ export class HuntListComponent implements OnInit {
 
 	hunts: Hunt[];
 
+	loading = false;
+
 	constructor(private huntService: HuntListService,
 	            private electronServiceInstance: ElectronService,
 	            private dialog: MatDialog) {
@@ -28,7 +30,7 @@ export class HuntListComponent implements OnInit {
 	}
 
 	public get isAtLeastOneHunt(): boolean {
-		return this.hunts != null && this.hunts.length > 0;
+		return this.hunts != null && this.hunts.length > 0 && !this.loading;
 	}
 
 	public createHunt(): void {
@@ -73,7 +75,11 @@ export class HuntListComponent implements OnInit {
 	}
 
 	private initHunts(): void {
+		this.loading = true;
 		this.hunts = [];
-		this.huntService.getHunts().then(hunts => this.hunts = hunts);
+		this.huntService.getHunts().then(hunts => {
+			this.hunts = hunts;
+			this.loading = false;
+		});
 	}
 }

@@ -33,6 +33,7 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {LabeledOutputComponent} from './labeled-output/labeled-output.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
 	declarations: [
@@ -71,6 +72,7 @@ import {LabeledOutputComponent} from './labeled-output/labeled-output.component'
 		MatProgressBarModule,
 		MatSlideToggleModule,
 		ClipboardModule,
+		MatSnackBarModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

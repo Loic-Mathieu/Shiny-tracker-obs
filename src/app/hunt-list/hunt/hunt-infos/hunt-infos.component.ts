@@ -3,6 +3,8 @@ import {Hunt} from '../../../models/hunt';
 import StatisticUtils from '../../../utils/statisticUtils';
 import {FileService} from '../../../service/file.service';
 import {FileType} from '../../../options/fileType';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import SpriteUtils from '../../../utils/spriteUtils';
 
 @Component({
 	selector: 'app-hunt-infos',
@@ -17,7 +19,11 @@ export class HuntInfosComponent implements OnInit {
 	@Output()
 	editEvent: EventEmitter<Hunt> = new EventEmitter<Hunt>();
 
-	constructor(private fileService: FileService) {
+	constructor(private fileService: FileService, private snackBar: MatSnackBar) {
+	}
+
+	public get sprite(): string {
+		return this.hunt.pokemonSprite ?? SpriteUtils.DEFAULT_SPRITE;
 	}
 
 	public get probability(): string {
@@ -55,7 +61,8 @@ export class HuntInfosComponent implements OnInit {
 	}
 
 	public copyToClipboard(source: string): string {
-		// TODO display message
+		// TODO use same method as in labeled output, this is called as render and will print 3x / second
+		// this.snackBar.open('Copied to clipboard 2!', null, {duration: 3000, horizontalPosition: 'center', verticalPosition: 'top'});
 		return source;
 	}
 }

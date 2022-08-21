@@ -1,8 +1,15 @@
 @import '~@angular/material/theming';
 
+$background-light: white;
+$background-dark: gray;
+
+$primary-y: #F2B71F;
+$secondary-y: #E7A300;
+
 $theme-light: mat-light-theme((
         color: (
-                primary: mat-palette($mat-indigo),
+                primary: $primary-y,
+                secondary: $secondary-y,
                 accent: mat-palette($mat-pink, A200, A100, A400),
         )
 ));

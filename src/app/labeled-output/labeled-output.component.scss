@@ -7,7 +7,7 @@
     $accent: map-get($color, accent);
 
     .labeled-output {
-        background: linear-gradient(110deg, black 50%, white 50%);
+        background: linear-gradient(110deg, $primary-y 50%, $background-light 50%);
     }
 
     .labeled-output.secondary {
@@ -32,7 +32,7 @@
 }
 
 .labeled-output .field .field-label {
-    color: white;
+    color: black;
     margin: 0;
 }
 

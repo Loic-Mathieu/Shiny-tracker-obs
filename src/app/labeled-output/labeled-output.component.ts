@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Clipboard} from '@angular/cdk/clipboard';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-labeled-output',
@@ -20,7 +21,7 @@ export class LabeledOutputComponent implements OnInit {
 	@Input()
 	secondary = false;
 
-	constructor(private clipboard: Clipboard) {
+	constructor(private clipboard: Clipboard, private snackBar: MatSnackBar) {
 	}
 
 	public get isCopiable(): boolean {
@@ -35,7 +36,8 @@ export class LabeledOutputComponent implements OnInit {
 			return;
 		}
 
-		// TODO print success message
+		// TODO move this in custom service
+		this.snackBar.open('Copied to clipboard !', 'OK', {duration: 3000, horizontalPosition: 'center', verticalPosition: 'top'});
 		this.clipboard.copy(this.copyValue);
 	}
 }

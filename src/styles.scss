@@ -9,6 +9,11 @@ html, body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: linear-gradient(110deg, $background-light 30%, $secondary-y 0.1%, $secondary-y 40%, $primary-y 0.1%, $primary-y 50%);
+}
+
+.main-menu {
+    background: $secondary-y;
 }
 
 .action-row {
